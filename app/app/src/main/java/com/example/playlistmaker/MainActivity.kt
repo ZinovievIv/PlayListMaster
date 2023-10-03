@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
             override fun onClick(v: View?) {
                 when(v?.id){
                     R.id.buttonSearch -> {
-                        val mediaLibraryIntent = Intent(this@MainActivity, SearchActivity::class.java)
+                        val mediaLibraryIntent = Intent(this@MainActivity, MediaLibraryActivity::class.java)
                         startActivity(mediaLibraryIntent)
                     }
                     R.id.buttonSettings -> {
@@ -40,8 +40,8 @@ class MainActivity : AppCompatActivity() {
 
 
         //buttonMedia.setOnClickListener {
-        //   val mediaLibraryIntent = Intent(this@MainActivity, MediaLibraryActivity::class.java)
-        //   startActivity(mediaLibraryIntent)
+         //   val mediaLibraryIntent = Intent(this@MainActivity, MediaLibraryActivity::class.java)
+         //   startActivity(mediaLibraryIntent)
         //}
 
         //buttonSettings.setOnClickListener {
