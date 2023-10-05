@@ -73,7 +73,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/control"
+                android:src="@drawable/ic_control"
                 android:paddingVertical="11dp"
                 android:paddingStart="9dp"
                 android:paddingEnd="12dp"/>
@@ -113,7 +113,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/share"
+                android:src="@drawable/ic_share"
                 android:paddingVertical="11dp"
                 android:paddingStart="9dp"
                 android:paddingEnd="12dp"/>
@@ -153,7 +153,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/call"
+                android:src="@drawable/ic_call"
                 android:paddingVertical="11dp"
                 android:paddingStart="9dp"
                 android:paddingEnd="12dp"/>
@@ -193,7 +193,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/arrow_forward"
+                android:src="@drawable/ic_arrow_forward"
                 android:paddingVertical="11dp"
                 android:paddingStart="9dp"
                 android:paddingEnd="12dp"/>
