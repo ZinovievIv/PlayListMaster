@@ -19,11 +19,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         buttonSearch.setOnClickListener{
-                val buttonSearchIntent =Intent(this@MainActivity, MediaLibraryActivity::class.java)
+                val buttonSearchIntent =Intent(this@MainActivity, SearchActivity::class.java)
                 startActivity(buttonSearchIntent)
         }
         buttonSettings.setOnClickListener {
-                val buttonSettingsIntent =Intent(this@MainActivity, MediaLibraryActivity::class.java)
+                val buttonSettingsIntent =Intent(this@MainActivity, SettingsActivity::class.java)
                 startActivity(buttonSettingsIntent)
         }
     }
