@@ -10,10 +10,10 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="4dp"
-        android:paddingEnd="52dp"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
+        android:paddingStart="@dimen/offset_4"
+        android:paddingEnd="@dimen/offset_52"
+        android:paddingTop="@dimen/offset_4"
+        android:paddingBottom="@dimen/offset_4"
         android:background="@android:color/white">
 
         <ImageButton
@@ -22,20 +22,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
-            android:paddingVertical="12dp"
-            android:paddingHorizontal="12dp"/>
+            android:paddingVertical="@dimen/offset_12"
+            android:paddingHorizontal="@dimen/offset_12"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:paddingStart="12dp"
-            android:paddingTop="10dp"
-            android:paddingEnd="86dp"
-            android:paddingBottom="12dp"
+            android:paddingStart="@dimen/offset_12"
+            android:paddingTop="@dimen/offset_10"
+            android:paddingEnd="@dimen/offset_86"
+            android:paddingBottom="@dimen/offset_12"
             android:text="@string/settings"
             android:textColor="@color/black"
-            android:textSize="22sp" />
+            android:textSize="@dimen/size_22" />
 
 
     </LinearLayout>
@@ -45,18 +45,18 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="@color/white"
-        android:paddingTop="24dp">
+        android:paddingTop="@dimen/offset_24">
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingVertical="21dp"
-            android:paddingStart="16dp"
-            android:paddingEnd="44dp">
+            android:paddingVertical="@dimen/offset_21"
+            android:paddingStart="@dimen/offset_16"
+            android:paddingEnd="@dimen/offset_44">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/darktheme"
-            android:textSize="16sp"
+            android:textSize="@dimen/offset_16"
             android:textColor="@color/black"
             android:layout_gravity="start"
             />
@@ -65,18 +65,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:paddingTop="10dp"
-            android:paddingBottom="11dp"
-            android:paddingEnd="6dp"
-            android:paddingStart="9dp"
+            android:paddingTop="@dimen/offset_10"
+            android:paddingBottom="@dimen/offset_11"
+            android:paddingEnd="@dimen/offset_6"
+            android:paddingStart="@dimen/offset_9"
             >
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_control"
-                android:paddingVertical="11dp"
-                android:paddingStart="9dp"
-                android:paddingEnd="12dp"/>
+                android:paddingVertical="@dimen/offset_11"
+                android:paddingStart="@dimen/offset_9"
+                android:paddingEnd="@dimen/offset_12"/>
         </FrameLayout>
 
     </FrameLayout>
@@ -89,14 +89,14 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingVertical="21dp"
-            android:paddingStart="16dp"
-            android:paddingEnd="44dp">
+            android:paddingVertical="@dimen/offset_21"
+            android:paddingStart="@dimen/offset_16"
+            android:paddingEnd="@dimen/offset_44">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/share"
-                android:textSize="16sp"
+                android:textSize="@dimen/offset_16"
                 android:textColor="@color/black"
                 android:layout_gravity="start"
                 />
@@ -105,18 +105,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:paddingTop="10dp"
-            android:paddingBottom="11dp"
-            android:paddingEnd="6dp"
-            android:paddingStart="9dp"
+            android:paddingTop="@dimen/offset_10"
+            android:paddingBottom="@dimen/offset_11"
+            android:paddingEnd="@dimen/offset_6"
+            android:paddingStart="@dimen/offset_9"
             >
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_share"
                 android:paddingVertical="11dp"
-                android:paddingStart="9dp"
-                android:paddingEnd="12dp"/>
+                android:paddingStart="@dimen/offset_9"
+                android:paddingEnd="@dimen/offset_12"/>
         </FrameLayout>
 
     </FrameLayout>
@@ -129,14 +129,14 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingVertical="21dp"
-            android:paddingStart="16dp"
-            android:paddingEnd="44dp">
+            android:paddingVertical="@dimen/offset_21"
+            android:paddingStart="@dimen/offset_16"
+            android:paddingEnd="@dimen/offset_44">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/support"
-                android:textSize="16sp"
+                android:textSize="@dimen/offset_16"
                 android:textColor="@color/black"
                 android:layout_gravity="start"
                 />
@@ -145,18 +145,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:paddingTop="10dp"
-            android:paddingBottom="11dp"
-            android:paddingEnd="6dp"
-            android:paddingStart="9dp"
+            android:paddingTop="@dimen/offset_10"
+            android:paddingBottom="@dimen/offset_11"
+            android:paddingEnd="@dimen/offset_6"
+            android:paddingStart="@dimen/offset_9"
             >
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_call"
-                android:paddingVertical="11dp"
-                android:paddingStart="9dp"
-                android:paddingEnd="12dp"/>
+                android:paddingVertical="@dimen/offset_11"
+                android:paddingStart="@dimen/offset_9"
+                android:paddingEnd="@dimen/offset_12"/>
         </FrameLayout>
 
     </FrameLayout>
@@ -169,14 +169,14 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingVertical="21dp"
-            android:paddingStart="16dp"
-            android:paddingEnd="44dp">
+            android:paddingVertical="@dimen/offset_21"
+            android:paddingStart="@dimen/offset_16"
+            android:paddingEnd="@dimen/offset_44">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/user_agreement"
-                android:textSize="16sp"
+                android:textSize="@dimen/size_16"
                 android:textColor="@color/black"
                 android:layout_gravity="start"
                 />
@@ -185,18 +185,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:paddingTop="10dp"
-            android:paddingBottom="11dp"
-            android:paddingEnd="6dp"
-            android:paddingStart="9dp"
+            android:paddingTop="@dimen/offset_10"
+            android:paddingBottom="@dimen/offset_11"
+            android:paddingEnd="@dimen/offset_6"
+            android:paddingStart="@dimen/offset_9"
             >
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_arrow_forward"
-                android:paddingVertical="11dp"
-                android:paddingStart="9dp"
-                android:paddingEnd="12dp"/>
+                android:paddingVertical="@dimen/offset_11"
+                android:paddingStart="@dimen/offset_9"
+                android:paddingEnd="@dimen/offset_12"/>
         </FrameLayout>
 
     </FrameLayout>

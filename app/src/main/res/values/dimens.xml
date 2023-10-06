@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="offset_12">12dp</dimen>
+    <dimen name="offset_10">10dp</dimen>
+    <dimen name="offset_62">62dp</dimen>
+    <dimen name="offset_4">4dp</dimen>
+    <dimen name="offset_16">16dp</dimen>
+    <dimen name="offset_26">26dp</dimen>
+    <dimen name="offset_8">8dp</dimen>
+    <dimen name="offset_52">52dp</dimen>
+    <dimen name="offset_86">86dp</dimen>
+    <dimen name="offset_24">24dp</dimen>
+    <dimen name="offset_21">21dp</dimen>
+    <dimen name="offset_44">44dp</dimen>
+    <dimen name="offset_11">11dp</dimen>
+    <dimen name="offset_6">6dp</dimen>
+    <dimen name="offset_9">9dp</dimen>
+
+
+
+    <dimen name="radius_16">16dp</dimen>
+
+
+    <dimen name="size_22">22sp</dimen>
+    <dimen name="size_16">16sp</dimen>
+
+</resources>
