@@ -61,7 +61,7 @@
             android:backgroundTint="@color/white"
             android:text="@string/mediaLibrary"
             android:textColor="@color/black"
-            android:textSize="22sp"
+            android:textSize="@dimen/size_22"
             app:icon="@drawable/ic_music"
             app:iconGravity="textStart"
             app:iconPadding="@dimen/offset_8"
