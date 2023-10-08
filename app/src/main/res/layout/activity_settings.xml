@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:background="@color/white">
+    android:background="?attr/colorPrimaryVariant">
 
     <LinearLayout
         android:id="@+id/toolbar"
@@ -14,14 +14,14 @@
         android:paddingEnd="@dimen/offset_52"
         android:paddingTop="@dimen/offset_4"
         android:paddingBottom="@dimen/offset_4"
-        android:background="@android:color/white">
+        android:background="?attr/colorPrimaryVariant">
 
-        <ImageButton
+        <ImageView
             android:id="@+id/arrow_back"
             android:src="@drawable/arrow_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="?attr/colorPrimaryVariant"
             android:paddingVertical="@dimen/offset_12"
             android:paddingHorizontal="@dimen/offset_12"/>
 
@@ -34,7 +34,7 @@
             android:paddingEnd="@dimen/offset_86"
             android:paddingBottom="@dimen/offset_12"
             android:text="@string/settings"
-            android:textColor="@color/black"
+            android:textColor="?attr/colorOnPrimary"
             android:textSize="@dimen/size_22" />
 
 
@@ -44,7 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/white"
+        android:background="?attr/colorPrimaryVariant"
         android:paddingTop="@dimen/offset_24">
         <FrameLayout
             android:layout_width="match_parent"
@@ -84,7 +84,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/white">
+        android:background="?attr/colorPrimaryVariant">
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -96,7 +96,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/share"
-                android:textColor="@color/black"
                 android:layout_gravity="start"
                 />
         </FrameLayout>
@@ -124,7 +123,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/white">
+        android:background="?attr/colorPrimaryVariant">
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -163,7 +162,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/white">
+        android:background="?attr/colorPrimaryVariant">
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
