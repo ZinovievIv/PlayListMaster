@@ -33,56 +33,34 @@
 
 
         <Button
+            style="@style/ButtonMainActivity"
             android:id="@+id/buttonSearch"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:cornerRadius="@dimen/radius_16"
             android:layout_marginTop="@dimen/offset_16"
             android:layout_weight="1"
-            android:backgroundTint="@color/white"
             android:text="@string/search"
-            android:textColor="@color/black"
-            android:textSize="@dimen/size_22"
-            app:icon="@drawable/ic_magnifier"
-            app:iconGravity="textStart"
-            app:iconPadding="@dimen/offset_8"
-            app:iconTint="@color/black"
-            android:foreground="?attr/selectableItemBackground"/>
-
-
+            app:icon="@drawable/ic_magnifier"/>
 
         <Button
+            style="@style/ButtonMainActivity"
             android:id="@+id/buttonMedia"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/offset_16"
             android:layout_weight="1"
-            app:cornerRadius="@dimen/radius_16"
-            android:backgroundTint="@color/white"
             android:text="@string/mediaLibrary"
-            android:textColor="@color/black"
-            android:textSize="@dimen/size_22"
-            app:icon="@drawable/ic_music"
-            app:iconGravity="textStart"
-            app:iconPadding="@dimen/offset_8"
-            app:iconTint="@color/black"
-            android:foreground="?attr/selectableItemBackground"/>
+            app:icon="@drawable/ic_music" />
 
         <Button
+            style="@style/ButtonMainActivity"
             android:id="@+id/buttonSettings"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/offset_16"
             android:layout_weight="1"
-            android:backgroundTint="@color/white"
             android:text="@string/settings"
-            android:textColor="@color/black"
-            android:textSize="@dimen/size_22"
-            app:cornerRadius="@dimen/radius_16"
-            app:icon="@drawable/ic_gearwheel"
-            app:iconGravity="textStart"
-            app:iconPadding="@dimen/offset_8"
-            app:iconTint="@color/black"
-            android:foreground="?attr/selectableItemBackground"/>
+            app:icon="@drawable/ic_gearwheel"/>
+
     </LinearLayout>
 </LinearLayout>

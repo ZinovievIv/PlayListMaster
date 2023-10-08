@@ -7,5 +7,7 @@
     <string name="darktheme">Темная тема</string>
     <string name="share" >Поделиться приложением</string>
     <string name="support" >Написать в поддержку</string>
-    <string name="user_agreement" >Пользовательское сошлашение</string>
+    <string name="user_agreement" >Пользовательское соглашение</string>
+    <string name="switchcompat">SwitchCompat</string>
+    <string name="off">OFF</string>
 </resources>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ButtonMainActivity">
+        <item name="android:fontFamily">@font/ys_display_medium</item>
+        <item name="android:textFontWeight">500</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="backgroundTint">@color/white</item>
+        <item name="cornerRadius">@dimen/radius_16</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconTint">@color/black</item>
+        <item name="iconPadding">@dimen/offset_8</item>
+        <item name="android:textSize">@dimen/size_22</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+    </style>
+    <style name="TextClassicStyle">
+        <item name="android:fontFamily">@font/ys_display_regular</item>
+        <item name="android:textFontWeight">400</item>
+        <item name="android:textSize">@dimen/offset_16</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="PanelHeaderStyle">
+
+    </style>
+
+</resources>
