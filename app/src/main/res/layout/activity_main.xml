@@ -12,11 +12,10 @@
         android:padding="@dimen/offset_4">
 
         <TextView
+            style="@style/PanelHeaderStyle"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textColor="@color/white"
             android:text="@string/app_name"
-            android:textSize="@dimen/size_22"
             android:paddingTop="@dimen/offset_10"
             android:paddingBottom="@dimen/offset_12"
             android:paddingStart="@dimen/offset_12"
@@ -30,7 +29,6 @@
         android:orientation="vertical"
         android:paddingHorizontal="@dimen/offset_16"
         android:paddingBottom="@dimen/offset_26">
-
 
         <Button
             style="@style/ButtonMainActivity"
@@ -61,6 +59,5 @@
             android:layout_weight="1"
             android:text="@string/settings"
             app:icon="@drawable/ic_gearwheel"/>
-
     </LinearLayout>
 </LinearLayout>
