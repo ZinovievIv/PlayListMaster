@@ -31,9 +31,10 @@ class SettingsActivity : AppCompatActivity() {
                 }
                 R.id.button_support -> {
                     val message = "Привет, Android-разработка — это круто!"
+                    val messageInTheme = "Сообщение разработчикам и разработчицам приложения Playlist Maker"
                     val shareIntent = Intent(Intent.ACTION_SENDTO)
                     shareIntent.data = Uri.parse("mailto:zinovev.ivan@mail.ru")
-                    shareIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf("zinovev.ivan@mail.ru"))
+                    shareIntent.putExtra(Intent.EXTRA_SUBJECT, messageInTheme)
                     shareIntent.putExtra(Intent.EXTRA_TEXT, message)
                     startActivity(shareIntent)
                 }
