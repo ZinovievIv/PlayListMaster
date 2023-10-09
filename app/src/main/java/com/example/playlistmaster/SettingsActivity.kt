@@ -15,6 +15,7 @@ class SettingsActivity : AppCompatActivity() {
         val buttonArrowBack = findViewById<ImageView>(R.id.arrow_back)
         val buttonShare = findViewById<ImageView>(R.id.button_share)
         val buttonSupport = findViewById<ImageView>(R.id.button_support)
+        val buttonUserAgreement = findViewById<ImageView>(R.id.user_agreement)
 
         val imageButtonClickListener: View.OnClickListener = View.OnClickListener { v ->
             when (v?.id) {
@@ -47,5 +48,6 @@ class SettingsActivity : AppCompatActivity() {
         buttonShare.setOnClickListener(imageButtonClickListener)
         buttonArrowBack.setOnClickListener(imageButtonClickListener)
         buttonSupport.setOnClickListener(imageButtonClickListener)
+        buttonUserAgreement.setOnClickListener(imageButtonClickListener)
     }
 }
