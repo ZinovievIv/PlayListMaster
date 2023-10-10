@@ -6,4 +6,60 @@
     android:layout_height="match_parent"
     tools:context=".SearchActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="45dp"
+        tools:layout_editor_absoluteY="115dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/offset_4"
+            android:layout_marginTop="@dimen/offset_4"
+            android:layout_marginEnd="@dimen/offset_52"
+            android:layout_marginBottom="@dimen/offset_4">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/offset_12"
+                android:src="@drawable/arrow_back" />
+
+            <TextView
+                style="@style/PanelHeaderStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/offset_12"
+                android:paddingTop="@dimen/offset_10"
+                android:paddingBottom="@dimen/offset_12"
+                android:text="@string/search"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/container_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/offset_16"
+            android:layout_marginVertical="@dimen/offset_8"
+            android:radius="8dp"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.SearchView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:iconifiedByDefault="false"
+                android:hint="@string/search"
+                android:background="@color/grayButton"
+                app:animateMenuItems="true">
+            </androidx.appcompat.widget.SearchView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
