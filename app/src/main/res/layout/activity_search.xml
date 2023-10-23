@@ -9,9 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="45dp"
-        tools:layout_editor_absoluteY="115dp">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,36 +27,57 @@
                 android:src="@drawable/arrow_back" />
 
             <TextView
-                style="@style/PanelHeaderStyle"
+                style="@style/OtherPanelHeaderStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="@dimen/offset_12"
                 android:paddingTop="@dimen/offset_10"
                 android:paddingBottom="@dimen/offset_12"
-                android:text="@string/search"
-                android:textColor="@color/black" />
+                android:text="@string/search" />
         </LinearLayout>
 
 
         <LinearLayout
             android:id="@+id/container_search"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="36dp"
             android:layout_marginHorizontal="@dimen/offset_16"
             android:layout_marginVertical="@dimen/offset_8"
+            android:orientation="horizontal"
             android:radius="8dp"
-            android:orientation="vertical">
+            android:background="@color/lightGray">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:src="@drawable/magnifer_gray"
+                android:layout_gravity="center"
+                android:paddingStart="@dimen/offset_12"/>
+
 
             <EditText
+                style="@style/TextClassicStyle"
                 android:id="@+id/searchBar"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                app:iconifiedByDefault="false"
-                android:text=""
+                android:layout_weight="1"
+                android:background="@color/lightGray"
                 android:hint="@string/search"
-                android:background="@color/grayButton"
-                app:animateMenuItems="true">
-            </EditText>
+                android:textColorHint="?attr/itemFillColor"
+                android:paddingStart="@dimen/offset_8"
+                app:animateMenuItems="true"
+                app:iconifiedByDefault="false"/>
+
+            <ImageView
+                android:id="@+id/clearButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/clear"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                android:paddingHorizontal="@dimen/offset_12"
+                android:paddingVertical="@dimen/offset_10" />
+
 
         </LinearLayout>
 

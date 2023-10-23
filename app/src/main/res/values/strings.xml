@@ -10,5 +10,9 @@
     <string name="user_agreement" >Пользовательское соглашение</string>
     <string name="switchcompat">SwitchCompat</string>
     <string name="off">OFF</string>
+    <string name="offer">https://yandex.ru/legal/practicum_offer</string>
+    <string name="eMailAddresTechSupport">mailto:zinovev.ivan@mail.ru</string>
+    <string name="templeteTextMessage">Привет, Android-разработка — это круто!</string>
+    <string name="templeteThemeMessage">Сообщение разработчикам и разработчицам приложения Playlist Maker</string>
 
 </resources>

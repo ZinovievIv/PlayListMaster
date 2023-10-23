@@ -31,16 +31,16 @@ class SettingsActivity : AppCompatActivity() {
                     startActivity(browseIntent)
                 }
                 R.id.button_support -> {
-                    val message = "Привет, Android-разработка — это круто!"
-                    val messageInTheme = "Сообщение разработчикам и разработчицам приложения Playlist Maker"
+                    val message = getString(R.string.templeteTextMessage)
+                    val messageInTheme = getString(R.string.templeteThemeMessage)
                     val shareIntent = Intent(Intent.ACTION_SENDTO)
-                    shareIntent.data = Uri.parse("mailto:zinovev.ivan@mail.ru")
+                    shareIntent.data = Uri.parse(getString(R.string.eMailAddresTechSupport))
                     shareIntent.putExtra(Intent.EXTRA_SUBJECT, messageInTheme)
                     shareIntent.putExtra(Intent.EXTRA_TEXT, message)
                     startActivity(shareIntent)
                 }
                 R.id.user_agreement -> {
-                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://yandex.ru/legal/practicum_offer"))
+                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.offer)))
                     startActivity(browserIntent)
                 }
             }

@@ -26,6 +26,7 @@
             android:paddingHorizontal="@dimen/offset_12"/>
 
         <TextView
+            style="@style/OtherPanelHeaderStyle"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -34,7 +35,6 @@
             android:paddingEnd="@dimen/offset_86"
             android:paddingBottom="@dimen/offset_12"
             android:text="@string/settings"
-            android:textColor="?attr/colorOnPrimary"
             android:textSize="@dimen/size_22" />
 
 
