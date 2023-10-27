@@ -15,12 +15,12 @@ import androidx.appcompat.app.AppCompatActivity
 
 class SearchActivity : AppCompatActivity() {
 
-    var text = ""
+    private var searchText = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
-        val arrow_Back = findViewById<ImageView>(R.id.arrow_back)
+        val arrowBack = findViewById<ImageView>(R.id.arrow_back)
         val searchBar = findViewById<EditText>(R.id.searchBar)
         val clearButton = findViewById<ImageView>(R.id.clearButton)
 
@@ -29,9 +29,8 @@ class SearchActivity : AppCompatActivity() {
             searchBar.hideKeyboard()
         }
 
-        arrow_Back.setOnClickListener {
-            val intent = Intent(this@SearchActivity, MainActivity::class.java)
-            startActivity(intent)
+        arrowBack.setOnClickListener {
+            finish()
         }
 
         val textWatcher = object : TextWatcher {
@@ -43,7 +42,7 @@ class SearchActivity : AppCompatActivity() {
                 } else {
                     clearButton.visibility = View.VISIBLE
                 }
-                text = p0.toString()
+                searchText = p0.toString()
             }
             override fun afterTextChanged(p0: Editable?) {
             }
@@ -53,24 +52,22 @@ class SearchActivity : AppCompatActivity() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putString(PRODUCT_AMOUNT, text)
-        Log.i("TestLog","Отработало OnSaveInstanceState")
+        outState.putString(PRODUCT_AMOUNT, searchText)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         val searchBar = findViewById<EditText>(R.id.searchBar)
         searchBar.setText(savedInstanceState.getString(PRODUCT_AMOUNT))
-        Log.i("TestLog","Отработало onRestoreInstanceState")
     }
 
-    companion object {
-        const val PRODUCT_AMOUNT = "PRODUCT_AMOUNT"
-        const val AMOUNT = ""
-    }
     fun View.hideKeyboard() {
         val inputManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputManager.hideSoftInputFromWindow(windowToken, 0)
+    }
+
+    companion object {
+        private const val PRODUCT_AMOUNT = "PRODUCT_AMOUNT"
     }
 
 

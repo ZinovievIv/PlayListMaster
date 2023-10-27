@@ -30,5 +30,7 @@
         <item name="android:textSize">@dimen/size_22</item>
         <item name="android:textColor">?attr/colorOnPrimary</item>
     </style>
+    <style name="MySwitchStyle" parent = "Widget.AppCompat.CompoundButton.Switch">
+    </style>
 
 </resources>

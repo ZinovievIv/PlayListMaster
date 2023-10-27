@@ -31,33 +31,48 @@
         android:paddingBottom="@dimen/offset_26">
 
         <Button
-            style="@style/ButtonMainActivity"
+            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
             android:id="@+id/buttonSearch"
+            android:fontFamily="@font/ys_display_medium"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:cornerRadius="@dimen/radius_16"
+            app:backgroundTint="@color/white"
+            android:textColor="@color/black"
             android:layout_marginTop="@dimen/offset_16"
             android:layout_weight="1"
             android:text="@string/search"
-            app:icon="@drawable/ic_magnifier"/>
+            app:icon="@drawable/ic_magnifier"
+            app:iconTint="@color/black"/>
 
         <Button
-            style="@style/ButtonMainActivity"
+            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
             android:id="@+id/buttonMedia"
+            android:fontFamily="@font/ys_display_medium"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:cornerRadius="@dimen/radius_16"
+            android:textColor="@color/black"
             android:layout_marginTop="@dimen/offset_16"
             android:layout_weight="1"
+            app:backgroundTint="@color/white"
             android:text="@string/mediaLibrary"
-            app:icon="@drawable/ic_music" />
+            app:icon="@drawable/ic_music"
+            app:iconTint="@color/black"/>
 
         <Button
-            style="@style/ButtonMainActivity"
+            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
             android:id="@+id/buttonSettings"
+            android:fontFamily="@font/ys_display_medium"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:cornerRadius="@dimen/radius_16"
+            android:textColor="@color/black"
+            app:backgroundTint="@color/white"
             android:layout_marginTop="@dimen/offset_16"
             android:layout_weight="1"
             android:text="@string/settings"
-            app:icon="@drawable/ic_gearwheel"/>
+            app:icon="@drawable/ic_gearwheel"
+            app:iconTint="@color/black"/>
     </LinearLayout>
 </LinearLayout>

@@ -70,8 +70,9 @@
             android:paddingStart="@dimen/offset_9"
             >
 
-            <androidx.appcompat.widget.SwitchCompat
-                android:id="@+id/switch_compat"
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                style="@style/MySwitchStyle"
+                android:id="@+id/themeSwitch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="50dp"
@@ -179,25 +180,15 @@
                 android:layout_gravity="start"
                 />
         </FrameLayout>
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:paddingTop="@dimen/offset_10"
-            android:paddingBottom="@dimen/offset_11"
-            android:paddingEnd="@dimen/offset_6"
-            android:paddingStart="@dimen/offset_9"
-            >
+
             <ImageView
                 android:id="@+id/user_agreement"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_arrow_forward"
-                android:paddingVertical="@dimen/offset_11"
-                android:paddingStart="@dimen/offset_9"
-                android:paddingEnd="@dimen/offset_12"/>
-        </FrameLayout>
-
+                android:layout_gravity="end"
+                android:paddingVertical="@dimen/offset_21"
+                android:paddingHorizontal="@dimen/offset_21"/>
     </FrameLayout>
 
 
