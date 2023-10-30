@@ -32,7 +32,7 @@ class SettingsActivity : AppCompatActivity() {
                 R.id.arrow_back -> {
                     finish()
                 }
-                R.id.button_share -> { //Проверил на разных версиях API, дает выбрать любое приложение, в котором можно отправить текст
+                R.id.button_share -> { //Проверил на разных версиях API(29 и 33), дает выбрать любое приложение, в котором можно отправить текст
                     val sendIntent: Intent = Intent().apply {
                         action = Intent.ACTION_SEND
                         putExtra(Intent.EXTRA_TEXT, getString(R.string.messageShare))
@@ -42,7 +42,7 @@ class SettingsActivity : AppCompatActivity() {
                     val shareIntent = Intent.createChooser(sendIntent, null)
                     startActivity(shareIntent)
                 }
-                R.id.button_support -> {                            //Проверил на разных версиях API, подставляет почту тему и текст письма
+                R.id.button_support -> {                            //Проверил на разных версиях API(29 и 33), подставляет почту тему и текст письма
                     val message = getString(R.string.templeteTextMessage)
                     val messageInTheme = getString(R.string.templeteThemeMessage)
                     val shareIntent = Intent(Intent.ACTION_SENDTO)
