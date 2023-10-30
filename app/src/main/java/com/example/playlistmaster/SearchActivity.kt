@@ -11,13 +11,14 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 
 
 class SearchActivity : AppCompatActivity() {
-
     private var searchText = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        checkTheme()
         setContentView(R.layout.activity_search)
 
         val arrowBack = findViewById<ImageView>(R.id.arrow_back)
@@ -48,6 +49,7 @@ class SearchActivity : AppCompatActivity() {
             }
         }
         searchBar.addTextChangedListener(textWatcher)
+
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -69,6 +71,12 @@ class SearchActivity : AppCompatActivity() {
     companion object {
         private const val PRODUCT_AMOUNT = "PRODUCT_AMOUNT"
     }
-
+    private fun checkTheme() {
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            setTheme(R.style.Theme_PlaylistMasterNight)
+        } else {
+            setTheme(R.style.Theme_PlaylistMaster)
+        }
+    }
 
 }

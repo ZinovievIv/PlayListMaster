@@ -5,24 +5,27 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Switch
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 
 
 class SettingsActivity : AppCompatActivity() {
-
+    private var positionSwitch = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         checkTheme()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
+        val themeSwitch = findViewById<com.google.android.material.switchmaterial.SwitchMaterial>(R.id.themeSwitch)
+        themeSwitch.isChecked = positionSwitch
         val buttonArrowBack = findViewById<ImageView>(R.id.arrow_back)
         val buttonShare = findViewById<ImageView>(R.id.button_share)
         val buttonSupport = findViewById<ImageView>(R.id.button_support)
         val buttonUserAgreement = findViewById<ImageView>(R.id.user_agreement)
-        val themeSwitch = findViewById<androidx.appcompat.widget.SwitchCompat>(R.id.themeSwitch)
 
         val imageButtonClickListener: View.OnClickListener = View.OnClickListener { v ->
             when (v?.id) {
@@ -64,12 +67,16 @@ class SettingsActivity : AppCompatActivity() {
         buttonUserAgreement.setOnClickListener(imageButtonClickListener)
         themeSwitch.setOnClickListener(imageButtonClickListener)
     }
-    
+
+
     private fun checkTheme() {
         if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
             setTheme(R.style.Theme_PlaylistMasterNight)
+            positionSwitch = true
         } else {
             setTheme(R.style.Theme_PlaylistMaster)
+            positionSwitch = false
         }
     }
+
 }
