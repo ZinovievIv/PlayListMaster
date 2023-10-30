@@ -33,11 +33,11 @@ class SettingsActivity : AppCompatActivity() {
                     finish()
                 }
                 R.id.button_share -> {
-                    val browseIntent = Intent(
-                        Intent.ACTION_VIEW,
-                        Uri.parse("https://practicum.yandex.ru/android-developer/")
-                    )
-                    startActivity(browseIntent)
+                    val message = getString(R.string.messageShare)
+                    val browseIntent = Intent(Intent.ACTION_SEND)
+                    browseIntent.putExtra(Intent.EXTRA_TEXT, message)
+                    val shareIntent = Intent.createChooser(browseIntent, null)
+                    startActivity(shareIntent)
                 }
                 R.id.button_support -> {
                     val message = getString(R.string.templeteTextMessage)
