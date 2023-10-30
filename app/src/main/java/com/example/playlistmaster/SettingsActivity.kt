@@ -32,14 +32,17 @@ class SettingsActivity : AppCompatActivity() {
                 R.id.arrow_back -> {
                     finish()
                 }
-                R.id.button_share -> {
-                    val message = getString(R.string.messageShare)
-                    val browseIntent = Intent(Intent.ACTION_SEND)
-                    browseIntent.putExtra(Intent.EXTRA_TEXT, message)
-                    val shareIntent = Intent.createChooser(browseIntent, null)
+                R.id.button_share -> { //Проверил на разных версиях API, дает выбрать любое приложение, в котором можно отправить текст
+                    val sendIntent: Intent = Intent().apply {
+                        action = Intent.ACTION_SEND
+                        putExtra(Intent.EXTRA_TEXT, getString(R.string.messageShare))
+                        type = "text/plain"
+                    }
+
+                    val shareIntent = Intent.createChooser(sendIntent, null)
                     startActivity(shareIntent)
                 }
-                R.id.button_support -> {
+                R.id.button_support -> {                            //Проверил на разных версиях API, подставляет почту тему и текст письма
                     val message = getString(R.string.templeteTextMessage)
                     val messageInTheme = getString(R.string.templeteThemeMessage)
                     val shareIntent = Intent(Intent.ACTION_SENDTO)
@@ -48,6 +51,7 @@ class SettingsActivity : AppCompatActivity() {
                     shareIntent.putExtra(Intent.EXTRA_TEXT, message)
                     startActivity(shareIntent)
                 }
+
                 R.id.user_agreement -> {
                     val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.offer)))
                     startActivity(browserIntent)
