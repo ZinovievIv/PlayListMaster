@@ -61,11 +61,11 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@android:color/transparent"
                 android:hint="@string/search"
                 android:paddingStart="@dimen/offset_8"
                 android:textColor="@color/black"
                 android:textColorHint="?attr/itemFillColor"
-                android:background="@android:color/transparent"
                 app:animateMenuItems="true"
                 app:iconifiedByDefault="false" />
 
@@ -81,6 +81,11 @@
 
 
         </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycleView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 

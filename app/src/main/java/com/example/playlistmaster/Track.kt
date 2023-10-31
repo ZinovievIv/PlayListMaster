@@ -1,8 +1,7 @@
 package com.example.playlistmaster
 
-class Track(
-    trackName: String,
-    artistName: String,
-    trackTime: String,
-    artworkUrl100: String
+data class Track(
+    val trackName: String,
+    val artistName: String,
+    val trackTime: String,
 )
