@@ -1,18 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="?attr/colorPrimary">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolBarMainActivity"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:title="@string/app_name"
+        app:titleTextColor="@color/white"
+        />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="@dimen/offset_24"
+        android:layout_marginBottom="@dimen/offset_28"
+        android:orientation="vertical"
+
+        >
+
+        <Button
+            style="@style/ButtonMainActivity"
+            android:id="@+id/buttonSearch"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/search"
+            app:icon="@drawable/ic_magnifier"
+            android:insetBottom = "8dp"
+            />
+
+        <Button
+            style="@style/ButtonMainActivity"
+            android:id="@+id/buttonMedia"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/mediaLibrary"
+            app:icon="@drawable/ic_music"
+            android:insetTop = "8dp"
+            android:insetBottom = "8dp"
+            />
+
+        <Button
+            style="@style/ButtonMainActivity"
+            android:id="@+id/buttonSettings"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/settings"
+            app:icon="@drawable/ic_gearwheel"
+            android:insetTop = "8dp"
+            />
+    </LinearLayout>
+</LinearLayout>

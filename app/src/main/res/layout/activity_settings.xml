@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="?attr/colorPrimaryVariant">
+
+    <LinearLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/offset_4"
+        android:paddingEnd="@dimen/offset_52"
+        android:paddingTop="@dimen/offset_4"
+        android:paddingBottom="@dimen/offset_4"
+        android:background="?attr/colorPrimaryVariant">
+
+        <ImageView
+            android:id="@+id/arrow_back"
+            android:src="@drawable/arrow_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="?attr/colorPrimaryVariant"
+            android:paddingVertical="@dimen/offset_12"
+            android:paddingHorizontal="@dimen/offset_12"/>
+
+        <TextView
+            style="@style/OtherPanelHeaderStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingStart="@dimen/offset_12"
+            android:paddingTop="@dimen/offset_10"
+            android:paddingEnd="@dimen/offset_86"
+            android:paddingBottom="@dimen/offset_12"
+            android:text="@string/settings"
+            android:textSize="@dimen/size_22" />
+
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="?attr/colorPrimaryVariant"
+        android:paddingTop="@dimen/offset_24">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/offset_21"
+            android:paddingStart="@dimen/offset_16"
+            android:paddingEnd="@dimen/offset_44">
+        <TextView
+            style="@style/TextClassicStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/darktheme"
+            android:layout_gravity="start"
+            />
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:paddingTop="@dimen/offset_10"
+            android:paddingBottom="@dimen/offset_11"
+            android:paddingEnd="@dimen/offset_6"
+            android:paddingStart="@dimen/offset_9"
+            >
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                style="@style/MySwitchStyle"
+                android:id="@+id/themeSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:checked="false" />
+        </FrameLayout>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="?attr/colorPrimaryVariant">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/offset_21"
+            android:paddingStart="@dimen/offset_16"
+            android:paddingEnd="@dimen/offset_44">
+            <TextView
+                style="@style/TextClassicStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/share"
+                android:layout_gravity="start"
+                />
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:paddingTop="10dp"
+            android:paddingBottom="11dp"
+            android:paddingEnd="6dp"
+            android:paddingStart="9dp"
+            >
+            <ImageView
+                android:id="@+id/button_share"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_share"
+                android:paddingVertical="11dp"
+                android:paddingStart="@dimen/offset_9"
+                android:paddingEnd="@dimen/offset_12"/>
+        </FrameLayout>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="?attr/colorPrimaryVariant">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/offset_21"
+            android:paddingStart="@dimen/offset_16"
+            android:paddingEnd="@dimen/offset_44">
+            <TextView
+                style="@style/TextClassicStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/support"
+                android:layout_gravity="start"
+                />
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:paddingTop="@dimen/offset_10"
+            android:paddingBottom="@dimen/offset_11"
+            android:paddingEnd="@dimen/offset_6"
+            android:paddingStart="@dimen/offset_9"
+            >
+            <ImageView
+                android:id="@+id/button_support"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_call"
+                android:paddingVertical="@dimen/offset_11"
+                android:paddingStart="@dimen/offset_9"
+                android:paddingEnd="@dimen/offset_12"/>
+        </FrameLayout>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="?attr/colorPrimaryVariant">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/offset_21"
+            android:paddingStart="@dimen/offset_16"
+            android:paddingEnd="@dimen/offset_44">
+            <TextView
+                style="@style/TextClassicStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/user_agreement"
+                android:layout_gravity="start"
+                />
+        </FrameLayout>
+
+            <ImageView
+                android:id="@+id/user_agreement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrow_forward"
+                android:layout_gravity="end"
+                android:paddingVertical="@dimen/offset_21"
+                android:paddingHorizontal="@dimen/offset_21"/>
+    </FrameLayout>
+
+
+</LinearLayout>
+
+
+
