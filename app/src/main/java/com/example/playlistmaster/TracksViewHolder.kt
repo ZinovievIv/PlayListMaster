@@ -29,7 +29,9 @@ class TracksViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         trackNameView.text = track.trackName
         artistNameView.text = track.artistName
         trackTimeView.text = track.trackTime
-        Glide.with(itemView).load(track.imageAlbumURL).into(imageAlbumURL)
-
+        Glide.with(itemView)
+            .load(track.imageAlbumURL)
+            .placeholder(R.drawable.loading_svgrepo_com)
+            .into(imageAlbumURL)
     }
 }
