@@ -58,8 +58,10 @@ class SettingsActivity : AppCompatActivity() {
                 }
                 R.id.themeSwitch -> {
                     if (themeSwitch.isChecked) {
+                        checkTheme()
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                     } else {
+                        checkTheme()
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                     }
                 }
