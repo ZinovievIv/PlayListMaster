@@ -38,7 +38,6 @@ class SettingsActivity : AppCompatActivity() {
                         putExtra(Intent.EXTRA_TEXT, getString(R.string.messageShare))
                         type = "text/plain"
                     }
-
                     val shareIntent = Intent.createChooser(sendIntent, null)
                     startActivity(shareIntent)
                 }
@@ -51,7 +50,6 @@ class SettingsActivity : AppCompatActivity() {
                     shareIntent.putExtra(Intent.EXTRA_TEXT, message)
                     startActivity(shareIntent)
                 }
-
                 R.id.user_agreement -> {
                     val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.offer)))
                     startActivity(browserIntent)

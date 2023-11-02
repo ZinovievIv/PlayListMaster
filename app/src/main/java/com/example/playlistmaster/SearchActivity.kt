@@ -1,11 +1,9 @@
 package com.example.playlistmaster
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -35,7 +33,7 @@ class SearchActivity : AppCompatActivity() {
 
         val recycle = findViewById<RecyclerView>(R.id.recycleView)
         recycle.layoutManager = LinearLayoutManager(this)
-        recycle.adapter = TrackAdapter(trackList)
+        recycle.adapter = TracksAdapter(trackList)
 
 
         val arrowBack = findViewById<ImageView>(R.id.arrow_back)
@@ -46,10 +44,10 @@ class SearchActivity : AppCompatActivity() {
             searchBar.setText("")
             searchBar.hideKeyboard()
         }
-
         arrowBack.setOnClickListener {
             finish()
         }
+
 
         val textWatcher = object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {

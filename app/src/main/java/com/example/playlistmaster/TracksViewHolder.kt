@@ -8,6 +8,7 @@ import androidx.appcompat.view.menu.MenuView.ItemView
 import androidx.core.content.contentValuesOf
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import org.w3c.dom.Text
 
 
@@ -31,6 +32,7 @@ class TracksViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         trackTimeView.text = track.trackTime
         Glide.with(itemView)
             .load(track.imageAlbumURL)
+            .transform(RoundedCorners(20))
             .placeholder(R.drawable.loading_svgrepo_com)
             .into(imageAlbumURL)
     }

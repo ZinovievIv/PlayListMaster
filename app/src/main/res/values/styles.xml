@@ -34,5 +34,19 @@
     </style>
     <style name="MySwitchStyle" parent = "Widget.AppCompat.CompoundButton.Switch">
     </style>
+    <style name="NameAlbum">
+        <item name="android:textColor">?attr/track</item>
+        <item name="android:textSize">@dimen/size_11</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+    </style>
+    <style name="NameTrack">
+        <item name="android:fontFamily">@font/ys_display_regular</item>
+        <item name="android:textFontWeight">400</item>
+        <item name="android:textSize">@dimen/offset_16</item>
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+    </style>
 
 </resources>
