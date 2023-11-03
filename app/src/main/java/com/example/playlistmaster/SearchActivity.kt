@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 
 class SearchActivity : AppCompatActivity() {
-    private var trackList = mutableListOf<Track>()
+    private val trackList = mutableListOf<Track>()
     private var searchText = ""
 
 
@@ -33,7 +33,7 @@ class SearchActivity : AppCompatActivity() {
 
         val recycle = findViewById<RecyclerView>(R.id.recycleView)
         recycle.layoutManager = LinearLayoutManager(this)
-        recycle.adapter = TracksAdapter(trackList)
+        recycle.adapter = TracksAdapter(trackList, this)
 
 
         val arrowBack = findViewById<ImageView>(R.id.arrow_back)

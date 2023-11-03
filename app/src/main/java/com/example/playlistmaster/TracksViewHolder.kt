@@ -1,18 +1,16 @@
 package com.example.playlistmaster
 
 import android.content.Context
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.view.menu.MenuView.ItemView
-import androidx.core.content.contentValuesOf
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import org.w3c.dom.Text
 
 
-class TracksViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class TracksViewHolder(itemView: View, private val context: Context) : RecyclerView.ViewHolder(itemView) {
 
     private val trackNameView : TextView
     private val artistNameView : TextView
@@ -32,8 +30,10 @@ class TracksViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         trackTimeView.text = track.trackTime
         Glide.with(itemView)
             .load(track.imageAlbumURL)
-            .transform(RoundedCorners(20))
-            .placeholder(R.drawable.loading_svgrepo_com)
+            .transform(RoundedCorners(2))
+            .placeholder(R.drawable.placeholder)
             .into(imageAlbumURL)
     }
+    fun convertPixelsToDp(context: Context, pixels: Int) =
+        (pixels / context.resources.displayMetrics.density).toInt()
 }
