@@ -36,4 +36,5 @@ class TracksViewHolder(itemView: View, private val context: Context) : RecyclerV
     }
     fun convertPixelsToDp(context: Context, pixels: Int) =
         (pixels / context.resources.displayMetrics.density).toInt()
+
 }
