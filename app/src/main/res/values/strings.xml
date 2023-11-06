@@ -15,5 +15,8 @@
     <string name="templeteTextMessage">Привет, Android-разработка — это круто!</string>
     <string name="templeteThemeMessage">Сообщение разработчикам и разработчицам приложения Playlist Maker</string>
     <string name="messageShare">https://practicum.yandex.ru/android-developer/</string>
+    <string name="trackname">Имя трека</string>
+    <string name="artict_name">Исполнитель</string>
+    <string name="time">4:45</string>
 
 </resources>

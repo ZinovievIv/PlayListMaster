@@ -32,17 +32,16 @@ class SettingsActivity : AppCompatActivity() {
                 R.id.arrow_back -> {
                     finish()
                 }
-                R.id.button_share -> { //Проверил на разных версиях API(29 и 33), дает выбрать любое приложение, в котором можно отправить текст
+                R.id.button_share -> {
                     val sendIntent: Intent = Intent().apply {
                         action = Intent.ACTION_SEND
                         putExtra(Intent.EXTRA_TEXT, getString(R.string.messageShare))
                         type = "text/plain"
                     }
-
                     val shareIntent = Intent.createChooser(sendIntent, null)
                     startActivity(shareIntent)
                 }
-                R.id.button_support -> {                            //Проверил на разных версиях API(29 и 33), подставляет почту тему и текст письма
+                R.id.button_support -> {
                     val message = getString(R.string.templeteTextMessage)
                     val messageInTheme = getString(R.string.templeteThemeMessage)
                     val shareIntent = Intent(Intent.ACTION_SENDTO)
@@ -51,15 +50,16 @@ class SettingsActivity : AppCompatActivity() {
                     shareIntent.putExtra(Intent.EXTRA_TEXT, message)
                     startActivity(shareIntent)
                 }
-
                 R.id.user_agreement -> {
                     val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.offer)))
                     startActivity(browserIntent)
                 }
                 R.id.themeSwitch -> {
                     if (themeSwitch.isChecked) {
+                        checkTheme()
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                     } else {
+                        checkTheme()
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                     }
                 }

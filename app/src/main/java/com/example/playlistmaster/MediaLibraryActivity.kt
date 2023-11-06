@@ -14,8 +14,10 @@ class MediaLibraryActivity : AppCompatActivity() {
     private fun checkTheme() {
         if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
             setTheme(R.style.Theme_PlaylistMasterNight)
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         } else {
             setTheme(R.style.Theme_PlaylistMaster)
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
     }
 

@@ -8,7 +8,9 @@
         <item name="colorOnPrimary">@color/black</item>
                 <!-- Secondary brand color. -->
         <item name="itemFillColor">@color/gray</item>
+        <item name="colorSecondaryVariant">@color/white</item>
+        <item name="track">@color/gray</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimary</item>
+        <item name="android:statusBarColor">@color/blue</item>
     </style>
 </resources>

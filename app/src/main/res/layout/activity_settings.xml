@@ -109,14 +109,15 @@
             android:paddingEnd="6dp"
             android:paddingStart="9dp"
             >
+
             <ImageView
                 android:id="@+id/button_share"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_share"
                 android:paddingVertical="11dp"
                 android:paddingStart="@dimen/offset_9"
-                android:paddingEnd="@dimen/offset_12"/>
+                android:paddingEnd="@dimen/offset_12"
+                android:src="@drawable/ic_share" />
         </FrameLayout>
 
     </FrameLayout>
