@@ -18,5 +18,6 @@
     <string name="trackname">Имя трека</string>
     <string name="artict_name">Исполнитель</string>
     <string name="time">4:45</string>
+    <string name="trouble_network">"Проблемы со связью\n\nЗагрузка не удалась.\nПроверьте подключение к интернет"</string>
 
 </resources>

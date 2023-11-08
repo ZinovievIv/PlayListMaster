@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import retrofit2.Retrofit
 import kotlin.math.roundToInt
 
 
@@ -35,7 +36,7 @@ class TracksViewHolder(itemView: View, private val context: Context) : RecyclerV
         Glide.with(itemView)
             .load(track.imageAlbumURL)
             .transform(RoundedCorners(dpToPx(roundCornenRadius, context)))
-            .placeholder(R.drawable.placeholder)
+            .placeholder(R.drawable.placeholder_track)
             .into(imageAlbumURL)
     }
 

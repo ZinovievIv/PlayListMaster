@@ -12,11 +12,20 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 
 class SearchActivity : AppCompatActivity() {
+
     private val trackList = mutableListOf<Track>()
     private var searchText = ""
+    private val itunesBaseUrl = "https://itunes.apple.com"
+    private val retrofit = Retrofit.Builder()
+        .baseUrl(itunesBaseUrl)
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+    private val itunesService = retrofit.create(ItunesApi::class.java)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +38,6 @@ class SearchActivity : AppCompatActivity() {
         trackList.add(Track("Stayin' Alive", "Bee Gees", "4:10","https://is4-ssl.mzstatic.com/image/thumb/Music115/v4/1f/80/1f/1f801fc1-8c0f-ea3e-d3e5-387c6619619e/16UMGIM86640.rgb.jpg/100x100bb.jpg"))
         trackList.add(Track("Whole Lotta Love", "Led Zeppelin", "5:33","https://is2-ssl.mzstatic.com/image/thumb/Music62/v4/7e/17/e3/7e17e33f-2efa-2a36-e916-7f808576cf6b/mzm.fyigqcbs.jpg/100x100bb.jpg"))
         trackList.add(Track("Sweet Child O'Mine", "Guns N' Roses", "5:03", "https://is5-ssl.mzstatic.com/image/thumb/Music125/v4/a0/4d/c4/a04dc484-03cc-02aa-fa82-5334fcb4bc16/18UMGIM24878.rgb.jpg/100x100bb.jpg"))
-
 
         val recycle = findViewById<RecyclerView>(R.id.recycleView)
         recycle.layoutManager = LinearLayoutManager(this)
@@ -44,10 +52,10 @@ class SearchActivity : AppCompatActivity() {
             searchBar.setText("")
             searchBar.hideKeyboard()
         }
+
         arrowBack.setOnClickListener {
             finish()
         }
-
 
         val textWatcher = object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -64,8 +72,8 @@ class SearchActivity : AppCompatActivity() {
             }
         }
         searchBar.addTextChangedListener(textWatcher)
-
     }
+
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
