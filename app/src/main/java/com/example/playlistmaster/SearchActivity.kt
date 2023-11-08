@@ -49,37 +49,41 @@ class SearchActivity : AppCompatActivity() {
         val searchBar = findViewById<EditText>(R.id.searchBar)
         val clearButton = findViewById<ImageView>(R.id.clearButton)
 
-        clearButton.setOnClickListener {
-            if (searchBar.text.isNotEmpty()) {
-                itunesService.findTrack(searchBar.text.toString())
-                    .enqueue(object : Callback<TrackResponse> {
-                        override fun onResponse(
-                            call: Call<TrackResponse>,
-                            response: Response<TrackResponse>
-                        ) {
-                            if (response.code() == 200) {
-                                trackList.clear()
-                                if (response.body()?.results?.isNotEmpty() == true) {
-                                    trackList.addAll(response.body()?.results!!)
-                                    Log.i("Test", "${trackList.toString()}")
-                                    adapter.notifyDataSetChanged()
-                                    recycle.visibility = View.VISIBLE
-                                }
-                                if (trackList.isEmpty()) {
-                                    showMessage("", "")
+        searchBar.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                if (searchBar.text.isNotEmpty()) {
+                    itunesService.findTrack(searchBar.text.toString())
+                        .enqueue(object : Callback<TrackResponse> {
+                            override fun onResponse(
+                                call: Call<TrackResponse>,
+                                response: Response<TrackResponse>
+                            ) {
+                                if (response.code() == 200) {
+                                    trackList.clear()
+                                    if (response.body()?.results?.isNotEmpty() == true) {
+                                        trackList.addAll(response.body()?.results!!)
+                                        Log.i("Test", "${trackList.toString()}")
+                                        adapter.notifyDataSetChanged()
+                                        recycle.visibility = View.VISIBLE
+                                    }
+                                    if (trackList.isEmpty()) {
+                                        showMessage("", "")
+                                    } else {
+                                        showMessage("", "")
+                                    }
                                 } else {
                                     showMessage("", "")
                                 }
-                            } else {
-                                showMessage("", "")
                             }
-                        }
 
-                        override fun onFailure(call: Call<TrackResponse>, t: Throwable) {
-                            TODO("Not yet implemented")
-                        }
-                    })
+                            override fun onFailure(call: Call<TrackResponse>, t: Throwable) {
+                                TODO("Not yet implemented")
+                            }
+                        })
+                }
+                true
             }
+            false
         }
 
 
