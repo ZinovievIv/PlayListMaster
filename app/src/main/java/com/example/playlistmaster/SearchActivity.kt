@@ -62,6 +62,7 @@ class SearchActivity : AppCompatActivity() {
                                     trackList.clear()
                                     if (response.body()?.results?.isNotEmpty() == true) {
                                         trackList.addAll(response.body()?.results!!)
+                                        Log.i("Test", "$trackList")
                                         adapter.notifyDataSetChanged()
                                         recycle.visibility = View.VISIBLE
                                     }

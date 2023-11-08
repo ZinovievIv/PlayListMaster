@@ -32,7 +32,7 @@ class TracksViewHolder(itemView: View, private val context: Context) : RecyclerV
     fun bind(track: Track) {
         trackNameView.text = track.trackName
         artistNameView.text = track.artistName
-        trackTimeView.text = track.trackTime
+        trackTimeView.text = track.trackTimeMillis
         Glide.with(itemView)
             .load(track.imageAlbumURL)
             .transform(RoundedCorners(dpToPx(roundCornenRadius, context)))
