@@ -62,7 +62,6 @@ class SearchActivity : AppCompatActivity() {
                                     trackList.clear()
                                     if (response.body()?.results?.isNotEmpty() == true) {
                                         trackList.addAll(response.body()?.results!!)
-                                        Log.i("Test", "${trackList.toString()}")
                                         adapter.notifyDataSetChanged()
                                         recycle.visibility = View.VISIBLE
                                     }
@@ -87,10 +86,10 @@ class SearchActivity : AppCompatActivity() {
         }
 
 
-            //clearButton.setOnClickListener {
-            // searchBar.setText("")
-            //searchBar.hideKeyboard()
-        //}
+        clearButton.setOnClickListener {
+            searchBar.setText("")
+            searchBar.hideKeyboard()
+            }
 
         arrowBack.setOnClickListener {
             finish()
