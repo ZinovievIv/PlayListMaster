@@ -20,12 +20,14 @@
 
 
     <dimen name="radius_16">16dp</dimen>
+    <dimen name="radius_54">54dp</dimen>
 
 
     <dimen name="size_22">22sp</dimen>
     <dimen name="size_19">19sp</dimen>
     <dimen name="size_16">16sp</dimen>
     <dimen name="size_11">11sp</dimen>
+    <dimen name="size_14">14sp</dimen>
 
 
 </resources>

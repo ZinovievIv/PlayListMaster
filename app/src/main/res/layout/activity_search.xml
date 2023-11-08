@@ -90,7 +90,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="invisible"
+            android:visibility="visible"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="102dp">
 
@@ -109,6 +109,14 @@
                 android:gravity="center"
                 android:textSize="19dp"
                 android:textFontWeight="400"/>
+
+            <Button
+                style="@style/ButtonUpdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Обновить"
+                android:layout_gravity="center_horizontal"/>
         </LinearLayout>
 
         <LinearLayout
