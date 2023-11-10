@@ -10,6 +10,7 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -48,6 +49,8 @@ class SearchActivity : AppCompatActivity() {
         val arrowBack = findViewById<ImageView>(R.id.arrow_back)
         val searchBar = findViewById<EditText>(R.id.searchBar)
         val clearButton = findViewById<ImageView>(R.id.clearButton)
+        val imagePlaceHolderNoResult = findViewById<ImageView>(R.id.imagePlaceHolderNoResults)
+        val textPlaceHolderNoResult = findViewById<TextView>(R.id.textPlaceHolderNoResults)
 
         searchBar.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
@@ -59,15 +62,20 @@ class SearchActivity : AppCompatActivity() {
                                 response: Response<TrackResponse>
                             ) {
                                 if (response.code() == 200) {
+                                    Log.i("Test", "${response.code()}")
                                     trackList.clear()
                                     if (response.body()?.results?.isNotEmpty() == true) {
                                         trackList.addAll(response.body()?.results!!)
                                         Log.i("Test", "$trackList")
+                                        imagePlaceHolderNoResult.visibility = View.INVISIBLE
+                                        textPlaceHolderNoResult.visibility = View.INVISIBLE
                                         adapter.notifyDataSetChanged()
                                         recycle.visibility = View.VISIBLE
                                     }
                                     if (trackList.isEmpty()) {
-                                        showMessage("", "")
+                                        Log.i("Test", "${trackList.isEmpty()}")
+                                        imagePlaceHolderNoResult.visibility = View.VISIBLE
+                                        textPlaceHolderNoResult.visibility = View.VISIBLE
                                     } else {
                                         showMessage("", "")
                                     }
