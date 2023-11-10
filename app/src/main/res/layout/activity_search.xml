@@ -129,7 +129,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="invisible"
-                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_marginTop="102dp"
+                android:layout_gravity="center_horizontal"
                 android:src="@drawable/placeholder_no_results"/>
 
             <TextView
@@ -138,9 +139,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:visibility="invisible"
-                android:layout_marginTop="@dimen/offset_16"
-                android:text="@string/no_result"
-                android:gravity="center" />
+                android:layout_marginTop="238dp"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/no_result" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycleView"
