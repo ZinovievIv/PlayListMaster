@@ -76,6 +76,7 @@ class SearchActivity : AppCompatActivity() {
                                         Log.i("Test", "${trackList.isEmpty()}")
                                         imagePlaceHolderNoResult.visibility = View.VISIBLE
                                         textPlaceHolderNoResult.visibility = View.VISIBLE
+                                        recycle.visibility = View.INVISIBLE
                                     } else {
                                         showMessage("", "")
                                     }
