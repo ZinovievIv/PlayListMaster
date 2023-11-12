@@ -38,7 +38,6 @@ class SearchActivity : AppCompatActivity() {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
     private val itunesService = retrofit.create(ItunesApi::class.java)
-    private val adapter = TracksAdapter(trackList,this)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,9 +55,6 @@ class SearchActivity : AppCompatActivity() {
         val textPlaceHolderNoNetwork = findViewById<TextView>(R.id.textPlaceHolderNoNetwork)
         val imagePlaceHolderNoNetwork = findViewById<ImageView>(R.id.imagePlaceHolderNoNetwork)
 
-
-
-
         val recycle = findViewById<RecyclerView>(R.id.recycleView)
         recycle.layoutManager = LinearLayoutManager(this)
         recycle.adapter = TracksAdapter(trackList, this)
@@ -73,14 +69,14 @@ class SearchActivity : AppCompatActivity() {
                             response: Response<TrackResponse>
                         ) {
                             if (response.code() == 200) {
-                                Log.i("Test", "${response.code()}")
+                                Log.i("Network", "${response.code()}")
                                 if (response.body()?.results?.isNotEmpty() == true) {
                                     recycle.adapter?.let {
                                         if (it is TracksAdapter) {
                                             it.updateTracks(response.body()?.results!!)
                                         }
                                     }
-                                    Log.i("Test", "$trackList")
+                                    Log.i("Network", "$trackList")
                                     imagePlaceHolderNoResult.visibility = View.INVISIBLE
                                     textPlaceHolderNoResult.visibility = View.INVISIBLE
                                     buttonPlaceHolderNoNetwork.visibility = View.INVISIBLE
@@ -161,20 +157,35 @@ class SearchActivity : AppCompatActivity() {
         searchBar.setText(savedInstanceState.getString(PRODUCT_AMOUNT))
     }
 
-    private fun showMessage(text: String, additionalMessage: String) {
-        if (text.isNotEmpty()) {
-            //placeholderMessage.visibility = View.VISIBLE
-            trackList.clear()
-            adapter.notifyDataSetChanged()
-            //placeholderMessage.text = text
-            if (additionalMessage.isNotEmpty()) {
-                Toast.makeText(applicationContext, additionalMessage, Toast.LENGTH_LONG)
-                    .show()
-            }
-        } else {
-            //placeholderMessage.visibility = View.GONE
-        }
-    }
+  //private fun visibilityPlaceHolders(truble: String) {
+  //    when (truble) {
+  //        "NoNetwork" -> {
+  //            buttonPlaceHolderNoNetwork.visibility = View.VISIBLE
+  //            textPlaceHolderNoNetwork.visibility = View.VISIBLE
+  //            imagePlaceHolderNoNetwork.visibility = View.VISIBLE
+  //            imagePlaceHolderNoResult.visibility = View.INVISIBLE
+  //            textPlaceHolderNoResult.visibility = View.INVISIBLE
+  //            recycle.visibility = View.INVISIBLE
+  //        }
+  //        "NoResult" -> {
+  //            imagePlaceHolderNoResult.visibility = View.VISIBLE
+  //            textPlaceHolderNoResult.visibility = View.VISIBLE
+  //            buttonPlaceHolderNoNetwork.visibility = View.INVISIBLE
+  //            textPlaceHolderNoNetwork.visibility = View.INVISIBLE
+  //            imagePlaceHolderNoNetwork.visibility = View.INVISIBLE
+  //            recycle.visibility = View.INVISIBLE
+  //        }
+  //        "UpdateSearch" -> {
+  //            imagePlaceHolderNoResult.visibility = View.INVISIBLE
+  //            textPlaceHolderNoResult.visibility = View.INVISIBLE
+  //            buttonPlaceHolderNoNetwork.visibility = View.INVISIBLE
+  //            textPlaceHolderNoNetwork.visibility = View.INVISIBLE
+  //            imagePlaceHolderNoNetwork.visibility = View.INVISIBLE
+  //            recycle.visibility = View.VISIBLE
+  //        }
+  //    }
+  //}
+
 
     fun View.hideKeyboard() {
         val inputManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
