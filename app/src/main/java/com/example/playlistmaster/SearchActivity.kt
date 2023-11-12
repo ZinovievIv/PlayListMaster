@@ -67,7 +67,7 @@ class SearchActivity : AppCompatActivity() {
                     itunesService.findTrack(searchBar.text.toString())
                         .enqueue(object : Callback<TrackResponse> {
                             override fun onResponse(
-                                call: Call<TrackResponse>,
+                                call: retrofit2.Call<TrackResponse>,
                                 response: Response<TrackResponse>
                             ) {
                                 if (response.code() == 200) {
@@ -88,9 +88,11 @@ class SearchActivity : AppCompatActivity() {
                                         Log.i("Test", "${trackList.isEmpty()}")
                                         imagePlaceHolderNoResult.visibility = View.VISIBLE
                                         textPlaceHolderNoResult.visibility = View.VISIBLE
+                                        buttonPlaceHolderNoNetwork.visibility = View.INVISIBLE
+                                        textPlaceHolderNoNetwork.visibility = View.INVISIBLE
+                                        imagePlaceHolderNoNetwork.visibility = View.INVISIBLE
                                         recycle.visibility = View.INVISIBLE
                                     } else {
-                                        showMessage("", "")
                                     }
                                 } else {
                                 }
@@ -100,6 +102,8 @@ class SearchActivity : AppCompatActivity() {
                                 buttonPlaceHolderNoNetwork.visibility = View.VISIBLE
                                 textPlaceHolderNoNetwork.visibility = View.VISIBLE
                                 imagePlaceHolderNoNetwork.visibility = View.VISIBLE
+                                imagePlaceHolderNoResult.visibility = View.INVISIBLE
+                                textPlaceHolderNoResult.visibility = View.INVISIBLE
                             }
                         })
                 }
@@ -108,9 +112,6 @@ class SearchActivity : AppCompatActivity() {
             recycle.visibility = View.VISIBLE
             false
         }
-
-
-
 
         clearButton.setOnClickListener {
             searchBar.setText("")

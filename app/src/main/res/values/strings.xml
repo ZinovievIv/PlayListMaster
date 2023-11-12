@@ -19,6 +19,6 @@
     <string name="artict_name">Исполнитель</string>
     <string name="time">4:45</string>
     <string name="no_result">Ничего не нашлось</string>
-    <string name="trouble_network">Проблемы со связью\n\nЗагрузка не удалась.\nПроверьте подключение к интернет</string>
+    <string name="trouble_network">Проблемы со связью\nЗагрузка не удалась.\nПроверьте подключение к интернет</string>
 
 </resources>
