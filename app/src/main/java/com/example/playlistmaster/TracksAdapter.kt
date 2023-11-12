@@ -15,4 +15,10 @@ class TracksAdapter(private val listTracks: ArrayList<Track>, private val contex
     override fun onBindViewHolder(holder: TracksViewHolder, position: Int) {
         holder.bind(listTracks[position])
     }
+
+    fun updateTracks(newTracks: List<Track>) {
+        listTracks.clear()
+        listTracks.addAll(newTracks)
+        notifyDataSetChanged()
+    }
 }

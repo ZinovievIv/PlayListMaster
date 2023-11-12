@@ -74,10 +74,12 @@ class SearchActivity : AppCompatActivity() {
                         ) {
                             if (response.code() == 200) {
                                 Log.i("Test", "${response.code()}")
-                                trackList.clear()
                                 if (response.body()?.results?.isNotEmpty() == true) {
-                                    trackList.addAll(response.body()?.results!!)
-                                    adapter.notifyDataSetChanged()
+                                    recycle.adapter?.let {
+                                        if (it is TracksAdapter) {
+                                            it.updateTracks(response.body()?.results!!)
+                                        }
+                                    }
                                     Log.i("Test", "$trackList")
                                     imagePlaceHolderNoResult.visibility = View.INVISIBLE
                                     textPlaceHolderNoResult.visibility = View.INVISIBLE
