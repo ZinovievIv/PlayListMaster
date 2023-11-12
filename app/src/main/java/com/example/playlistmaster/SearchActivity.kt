@@ -50,7 +50,7 @@ class SearchActivity : AppCompatActivity() {
         val clearButton = findViewById<ImageView>(R.id.clearButton)
         val imagePlaceHolderNoResult = findViewById<ImageView>(R.id.imagePlaceHolderNoResults)
         val textPlaceHolderNoResult = findViewById<TextView>(R.id.textPlaceHolderNoResults)
-        val buttonPlaceHolderNoNetwork = findViewById<Button>(R.id.buttonPlaceHolderNoNetwork)
+        val buttonPlaceHolderNoNetwork = findViewById<Button>(R.id.buttonUpdate)
         val textPlaceHolderNoNetwork = findViewById<TextView>(R.id.textPlaceHolderNoNetwork)
         val imagePlaceHolderNoNetwork = findViewById<ImageView>(R.id.imagePlaceHolderNoNetwork)
 
@@ -61,55 +61,64 @@ class SearchActivity : AppCompatActivity() {
         recycle.layoutManager = LinearLayoutManager(this)
         recycle.adapter = TracksAdapter(trackList, this)
 
-        searchBar.setOnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                if (searchBar.text.isNotEmpty()) {
-                    itunesService.findTrack(searchBar.text.toString())
-                        .enqueue(object : Callback<TrackResponse> {
-                            override fun onResponse(
-                                call: retrofit2.Call<TrackResponse>,
-                                response: Response<TrackResponse>
-                            ) {
-                                if (response.code() == 200) {
-                                    Log.i("Test", "${response.code()}")
-                                    trackList.clear()
-                                    if (response.body()?.results?.isNotEmpty() == true) {
-                                        trackList.addAll(response.body()?.results!!)
-                                        adapter.notifyDataSetChanged()
-                                        Log.i("Test", "$trackList")
-                                        imagePlaceHolderNoResult.visibility = View.INVISIBLE
-                                        textPlaceHolderNoResult.visibility = View.INVISIBLE
-                                        buttonPlaceHolderNoNetwork.visibility = View.INVISIBLE
-                                        textPlaceHolderNoNetwork.visibility = View.INVISIBLE
-                                        imagePlaceHolderNoNetwork.visibility = View.INVISIBLE
-                                        recycle.visibility = View.VISIBLE
-                                    }
-                                    if (trackList.isEmpty()) {
-                                        Log.i("Test", "${trackList.isEmpty()}")
-                                        imagePlaceHolderNoResult.visibility = View.VISIBLE
-                                        textPlaceHolderNoResult.visibility = View.VISIBLE
-                                        buttonPlaceHolderNoNetwork.visibility = View.INVISIBLE
-                                        textPlaceHolderNoNetwork.visibility = View.INVISIBLE
-                                        imagePlaceHolderNoNetwork.visibility = View.INVISIBLE
-                                        recycle.visibility = View.INVISIBLE
-                                    } else {
-                                    }
+        fun request() {
+            searchText = searchBar.text.toString()
+            if (searchText.isNotEmpty()) {
+                itunesService.findTrack(searchBar.text.toString())
+                    .enqueue(object : Callback<TrackResponse> {
+                        override fun onResponse(
+                            call: Call<TrackResponse>,
+                            response: Response<TrackResponse>
+                        ) {
+                            if (response.code() == 200) {
+                                Log.i("Test", "${response.code()}")
+                                trackList.clear()
+                                if (response.body()?.results?.isNotEmpty() == true) {
+                                    trackList.addAll(response.body()?.results!!)
+                                    adapter.notifyDataSetChanged()
+                                    Log.i("Test", "$trackList")
+                                    imagePlaceHolderNoResult.visibility = View.INVISIBLE
+                                    textPlaceHolderNoResult.visibility = View.INVISIBLE
+                                    buttonPlaceHolderNoNetwork.visibility = View.INVISIBLE
+                                    textPlaceHolderNoNetwork.visibility = View.INVISIBLE
+                                    imagePlaceHolderNoNetwork.visibility = View.INVISIBLE
+                                    recycle.visibility = View.VISIBLE
+                                }
+                                if (trackList.isEmpty()) {
+                                    Log.i("Test", "${trackList.isEmpty()}")
+                                    imagePlaceHolderNoResult.visibility = View.VISIBLE
+                                    textPlaceHolderNoResult.visibility = View.VISIBLE
+                                    buttonPlaceHolderNoNetwork.visibility = View.INVISIBLE
+                                    textPlaceHolderNoNetwork.visibility = View.INVISIBLE
+                                    imagePlaceHolderNoNetwork.visibility = View.INVISIBLE
+                                    recycle.visibility = View.INVISIBLE
                                 } else {
                                 }
+                            } else {
                             }
+                        }
 
-                            override fun onFailure(call: Call<TrackResponse>, t: Throwable) {
-                                buttonPlaceHolderNoNetwork.visibility = View.VISIBLE
-                                textPlaceHolderNoNetwork.visibility = View.VISIBLE
-                                imagePlaceHolderNoNetwork.visibility = View.VISIBLE
-                                imagePlaceHolderNoResult.visibility = View.INVISIBLE
-                                textPlaceHolderNoResult.visibility = View.INVISIBLE
-                            }
-                        })
-                }
-                true
+                        override fun onFailure(call: Call<TrackResponse>, t: Throwable) {
+                            buttonPlaceHolderNoNetwork.visibility = View.VISIBLE
+                            textPlaceHolderNoNetwork.visibility = View.VISIBLE
+                            imagePlaceHolderNoNetwork.visibility = View.VISIBLE
+                            imagePlaceHolderNoResult.visibility = View.INVISIBLE
+                            textPlaceHolderNoResult.visibility = View.INVISIBLE
+                            recycle.visibility = View.INVISIBLE
+                        }
+                    })
             }
-            recycle.visibility = View.VISIBLE
+        }
+
+
+        buttonPlaceHolderNoNetwork.setOnClickListener {
+            request()
+        }
+
+        searchBar.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                request()
+            }
             false
         }
 
