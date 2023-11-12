@@ -64,7 +64,7 @@ class SearchActivity : AppCompatActivity() {
         fun request() {
             searchText = searchBar.text.toString()
             if (searchText.isNotEmpty()) {
-                itunesService.findTrack(searchBar.text.toString())
+                itunesService.findTrack(searchText)
                     .enqueue(object : Callback<TrackResponse> {
                         override fun onResponse(
                             call: Call<TrackResponse>,
