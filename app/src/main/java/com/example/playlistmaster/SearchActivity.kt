@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
@@ -17,6 +18,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -48,6 +50,12 @@ class SearchActivity : AppCompatActivity() {
         val clearButton = findViewById<ImageView>(R.id.clearButton)
         val imagePlaceHolderNoResult = findViewById<ImageView>(R.id.imagePlaceHolderNoResults)
         val textPlaceHolderNoResult = findViewById<TextView>(R.id.textPlaceHolderNoResults)
+        val buttonPlaceHolderNoNetwork = findViewById<Button>(R.id.buttonPlaceHolderNoNetwork)
+        val textPlaceHolderNoNetwork = findViewById<TextView>(R.id.textPlaceHolderNoNetwork)
+        val imagePlaceHolderNoNetwork = findViewById<ImageView>(R.id.imagePlaceHolderNoNetwork)
+
+
+
 
         val recycle = findViewById<RecyclerView>(R.id.recycleView)
         recycle.layoutManager = LinearLayoutManager(this)
@@ -71,6 +79,9 @@ class SearchActivity : AppCompatActivity() {
                                         Log.i("Test", "$trackList")
                                         imagePlaceHolderNoResult.visibility = View.INVISIBLE
                                         textPlaceHolderNoResult.visibility = View.INVISIBLE
+                                        buttonPlaceHolderNoNetwork.visibility = View.INVISIBLE
+                                        textPlaceHolderNoNetwork.visibility = View.INVISIBLE
+                                        imagePlaceHolderNoNetwork.visibility = View.INVISIBLE
                                         recycle.visibility = View.VISIBLE
                                     }
                                     if (trackList.isEmpty()) {
@@ -82,12 +93,13 @@ class SearchActivity : AppCompatActivity() {
                                         showMessage("", "")
                                     }
                                 } else {
-                                    showMessage("", "")
                                 }
                             }
 
                             override fun onFailure(call: Call<TrackResponse>, t: Throwable) {
-                                TODO("Not yet implemented")
+                                buttonPlaceHolderNoNetwork.visibility = View.VISIBLE
+                                textPlaceHolderNoNetwork.visibility = View.VISIBLE
+                                imagePlaceHolderNoNetwork.visibility = View.VISIBLE
                             }
                         })
                 }

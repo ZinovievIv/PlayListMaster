@@ -88,19 +88,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="invisible"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="102dp">
-
             <ImageView
                 android:id="@+id/imagePlaceHolderNoNetwork"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_gravity="center_horizontal"
+                android:visibility="invisible"
+                android:layout_marginTop="210dp"
                 android:src="@drawable/placeholder_no_network"/>
 
             <TextView
@@ -108,21 +102,21 @@
                 style="@style/TextPlaceHolder"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/offset_16"
+                android:layout_gravity="center_horizontal"
                 android:text="@string/trouble_network"
+                android:visibility="invisible"
                 android:gravity="center"
-                android:textSize="19dp"
-                android:textFontWeight="400"/>
+                android:layout_marginTop="16dp"/>
 
             <Button
                 android:id="@+id/buttonPlaceHolderNoNetwork"
                 style="@style/ButtonUpdate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="458dp"
+                android:visibility="invisible"
                 android:text="Обновить"
                 android:layout_gravity="center_horizontal"/>
-        </LinearLayout>
 
             <ImageView
                 android:id="@+id/imagePlaceHolderNoResults"
