@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import retrofit2.Retrofit
 import kotlin.math.roundToInt
+import kotlin.time.Duration
 
 
 class TracksViewHolder(itemView: View, private val context: Context) : RecyclerView.ViewHolder(itemView) {
@@ -32,7 +33,7 @@ class TracksViewHolder(itemView: View, private val context: Context) : RecyclerV
     fun bind(track: Track) {
         trackNameView.text = track.trackName
         artistNameView.text = track.artistName
-        trackTimeView.text = track.trackTimeMillis
+        trackTimeView.text = track.getFormattedTrackTime()
         Glide.with(itemView)
             .load(track.imageAlbumURL)
             .transform(RoundedCorners(dpToPx(roundCornenRadius, context)))
