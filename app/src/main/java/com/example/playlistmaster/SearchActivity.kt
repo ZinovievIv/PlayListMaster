@@ -85,7 +85,6 @@ class SearchActivity : AppCompatActivity() {
                                     recycle.visibility = View.VISIBLE
                                 }
                                 if (trackList.isEmpty()) {
-                                    Log.i("Test", "${trackList.isEmpty()}")
                                     imagePlaceHolderNoResult.visibility = View.VISIBLE
                                     textPlaceHolderNoResult.visibility = View.VISIBLE
                                     buttonPlaceHolderNoNetwork.visibility = View.INVISIBLE
