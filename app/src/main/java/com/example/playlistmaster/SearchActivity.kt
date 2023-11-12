@@ -14,6 +14,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import retrofit2.Call
@@ -33,7 +34,7 @@ class SearchActivity : AppCompatActivity() {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
     private val itunesService = retrofit.create(ItunesApi::class.java)
-    private val adapter = TracksAdapter(trackList, this)
+    private val adapter = TracksAdapter(trackList,this)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,16 +42,16 @@ class SearchActivity : AppCompatActivity() {
         checkTheme()
         setContentView(R.layout.activity_search)
 
-        val recycle = findViewById<RecyclerView>(R.id.recycleView)
-        recycle.layoutManager = LinearLayoutManager(this)
-        recycle.adapter = TracksAdapter(trackList, this)
-
 
         val arrowBack = findViewById<ImageView>(R.id.arrow_back)
         val searchBar = findViewById<EditText>(R.id.searchBar)
         val clearButton = findViewById<ImageView>(R.id.clearButton)
         val imagePlaceHolderNoResult = findViewById<ImageView>(R.id.imagePlaceHolderNoResults)
         val textPlaceHolderNoResult = findViewById<TextView>(R.id.textPlaceHolderNoResults)
+
+        val recycle = findViewById<RecyclerView>(R.id.recycleView)
+        recycle.layoutManager = LinearLayoutManager(this)
+        recycle.adapter = TracksAdapter(trackList, this)
 
         searchBar.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
@@ -66,10 +67,10 @@ class SearchActivity : AppCompatActivity() {
                                     trackList.clear()
                                     if (response.body()?.results?.isNotEmpty() == true) {
                                         trackList.addAll(response.body()?.results!!)
+                                        adapter.notifyDataSetChanged()
                                         Log.i("Test", "$trackList")
                                         imagePlaceHolderNoResult.visibility = View.INVISIBLE
                                         textPlaceHolderNoResult.visibility = View.INVISIBLE
-                                        adapter.notifyDataSetChanged()
                                         recycle.visibility = View.VISIBLE
                                     }
                                     if (trackList.isEmpty()) {
@@ -92,8 +93,11 @@ class SearchActivity : AppCompatActivity() {
                 }
                 true
             }
+            recycle.visibility = View.VISIBLE
             false
         }
+
+
 
 
         clearButton.setOnClickListener {

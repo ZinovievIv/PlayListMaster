@@ -15,6 +15,4 @@ class TracksAdapter(private val listTracks: List<Track>, private val context: Co
     override fun onBindViewHolder(holder: TracksViewHolder, position: Int) {
         holder.bind(listTracks[position])
     }
-
-
 }
