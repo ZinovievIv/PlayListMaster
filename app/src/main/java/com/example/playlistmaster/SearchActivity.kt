@@ -38,13 +38,13 @@ class SearchActivity : AppCompatActivity() {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
     private val itunesService = retrofit.create(ItunesApi::class.java)
+    private val adapter = TracksAdapter(trackList,this)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         checkTheme()
         setContentView(R.layout.activity_search)
-
 
         val arrowBack = findViewById<ImageView>(R.id.arrow_back)
         val searchBar = findViewById<EditText>(R.id.searchBar)
@@ -57,7 +57,7 @@ class SearchActivity : AppCompatActivity() {
 
         val recycle = findViewById<RecyclerView>(R.id.recycleView)
         recycle.layoutManager = LinearLayoutManager(this)
-        recycle.adapter = TracksAdapter(trackList, this)
+        recycle.adapter = adapter
 
         fun request() {
             searchText = searchBar.text.toString()
@@ -70,6 +70,7 @@ class SearchActivity : AppCompatActivity() {
                         ) {
                             if (response.code() == 200) {
                                 Log.i("Network", "${response.code()}")
+                                adapter.clearListTracks(trackList)
                                 if (response.body()?.results?.isNotEmpty() == true) {
                                     recycle.adapter?.let {
                                         if (it is TracksAdapter) {

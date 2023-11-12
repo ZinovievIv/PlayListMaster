@@ -21,4 +21,10 @@ class TracksAdapter(private val listTracks: ArrayList<Track>, private val contex
         listTracks.addAll(newTracks)
         notifyDataSetChanged()
     }
+
+    fun clearListTracks(listTracks: ArrayList<Track>) {
+        listTracks.clear()
+    }
+
+
 }
