@@ -18,6 +18,8 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import org.jetbrains.annotations.NotNull
+import org.jetbrains.annotations.Nullable
 import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Callback
@@ -28,7 +30,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class SearchActivity : AppCompatActivity() {
 
-    private val trackList = mutableListOf<Track>()
+    private var trackList = ArrayList<Track>()
     private var searchText = ""
     private val itunesBaseUrl = "https://itunes.apple.com"
     private val retrofit = Retrofit.Builder()
@@ -93,7 +95,6 @@ class SearchActivity : AppCompatActivity() {
                                     recycle.visibility = View.INVISIBLE
                                 } else {
                                 }
-                            } else {
                             }
                         }
 
@@ -146,7 +147,6 @@ class SearchActivity : AppCompatActivity() {
         }
         searchBar.addTextChangedListener(textWatcher)
     }
-
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
