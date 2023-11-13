@@ -113,9 +113,9 @@
                 style="@style/ButtonUpdate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="350dp"
+                android:layout_marginTop="376dp"
                 android:visibility="visible"
-                android:text="Обновить"
+                android:text="@string/update"
                 android:layout_gravity="center_horizontal"/>
 
             <ImageView
