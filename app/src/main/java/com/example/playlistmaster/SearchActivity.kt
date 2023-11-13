@@ -94,6 +94,7 @@ class SearchActivity : AppCompatActivity() {
             binding.searchBar.setText("")
             binding.searchBar.hideKeyboard()
             adapter.clearListTracks(trackList)
+            visibilityPlaceHolders("UpdateSearch")
         }
 
         binding.arrowBack.setOnClickListener {
