@@ -8,19 +8,11 @@ import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import org.jetbrains.annotations.NotNull
-import org.jetbrains.annotations.Nullable
-import org.w3c.dom.Text
+import com.example.playlistmaster.databinding.ActivitySearchBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -29,6 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 class SearchActivity : AppCompatActivity() {
+    private lateinit var binding: ActivitySearchBinding
 
     private var trackList = ArrayList<Track>()
     private var searchText = ""
@@ -38,29 +31,22 @@ class SearchActivity : AppCompatActivity() {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
     private val itunesService = retrofit.create(ItunesApi::class.java)
-    private val adapter = TracksAdapter(trackList,this)
+    private val adapter = TracksAdapter(trackList, this)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         checkTheme()
-        setContentView(R.layout.activity_search)
+        binding = ActivitySearchBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
-        val arrowBack = findViewById<ImageView>(R.id.arrow_back)
-        val searchBar = findViewById<EditText>(R.id.searchBar)
-        val clearButton = findViewById<ImageView>(R.id.clearButton)
-        val imagePlaceHolderNoResult = findViewById<ImageView>(R.id.imagePlaceHolderNoResults)
-        val textPlaceHolderNoResult = findViewById<TextView>(R.id.textPlaceHolderNoResults)
-        val buttonPlaceHolderNoNetwork = findViewById<Button>(R.id.buttonUpdate)
-        val textPlaceHolderNoNetwork = findViewById<TextView>(R.id.textPlaceHolderNoNetwork)
-        val imagePlaceHolderNoNetwork = findViewById<ImageView>(R.id.imagePlaceHolderNoNetwork)
-
-        val recycle = findViewById<RecyclerView>(R.id.recycleView)
+        val recycle = binding.recycleView
         recycle.layoutManager = LinearLayoutManager(this)
         recycle.adapter = adapter
 
         fun request() {
-            searchText = searchBar.text.toString()
+            searchText = binding.searchBar.text.toString()
             if (searchText.isNotEmpty()) {
                 itunesService.findTrack(searchText)
                     .enqueue(object : Callback<TrackResponse> {
@@ -78,55 +64,39 @@ class SearchActivity : AppCompatActivity() {
                                         }
                                     }
                                     Log.i("Network", "$trackList")
-                                    imagePlaceHolderNoResult.visibility = View.INVISIBLE
-                                    textPlaceHolderNoResult.visibility = View.INVISIBLE
-                                    buttonPlaceHolderNoNetwork.visibility = View.INVISIBLE
-                                    textPlaceHolderNoNetwork.visibility = View.INVISIBLE
-                                    imagePlaceHolderNoNetwork.visibility = View.INVISIBLE
-                                    recycle.visibility = View.VISIBLE
+                                    visibilityPlaceHolders("UpdateSearch")
                                 }
                                 if (trackList.isEmpty()) {
-                                    imagePlaceHolderNoResult.visibility = View.VISIBLE
-                                    textPlaceHolderNoResult.visibility = View.VISIBLE
-                                    buttonPlaceHolderNoNetwork.visibility = View.INVISIBLE
-                                    textPlaceHolderNoNetwork.visibility = View.INVISIBLE
-                                    imagePlaceHolderNoNetwork.visibility = View.INVISIBLE
-                                    recycle.visibility = View.INVISIBLE
-                                } else {
+                                    visibilityPlaceHolders("NoResult")
                                 }
                             }
                         }
 
                         override fun onFailure(call: Call<TrackResponse>, t: Throwable) {
-                            buttonPlaceHolderNoNetwork.visibility = View.VISIBLE
-                            textPlaceHolderNoNetwork.visibility = View.VISIBLE
-                            imagePlaceHolderNoNetwork.visibility = View.VISIBLE
-                            imagePlaceHolderNoResult.visibility = View.INVISIBLE
-                            textPlaceHolderNoResult.visibility = View.INVISIBLE
-                            recycle.visibility = View.INVISIBLE
+                            visibilityPlaceHolders("NoNetwork")
                         }
                     })
             }
         }
 
 
-        buttonPlaceHolderNoNetwork.setOnClickListener {
+        binding.buttonUpdate.setOnClickListener {
             request()
         }
 
-        searchBar.setOnEditorActionListener { _, actionId, _ ->
+        binding.searchBar.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 request()
             }
             false
         }
 
-        clearButton.setOnClickListener {
-            searchBar.setText("")
-            searchBar.hideKeyboard()
-            }
+        binding.clearButton.setOnClickListener {
+            binding.searchBar.setText("")
+            binding.searchBar.hideKeyboard()
+        }
 
-        arrowBack.setOnClickListener {
+        binding.arrowBack.setOnClickListener {
             finish()
         }
 
@@ -134,17 +104,17 @@ class SearchActivity : AppCompatActivity() {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                if(p0.isNullOrEmpty()){
-                    clearButton.visibility = View.GONE
+                if (p0.isNullOrEmpty()) {
+                    binding.clearButton.visibility = View.GONE
                 } else {
-                    clearButton.visibility = View.VISIBLE
+                    binding.clearButton.visibility = View.VISIBLE
                 }
                 searchText = p0.toString()
             }
             override fun afterTextChanged(p0: Editable?) {
             }
         }
-        searchBar.addTextChangedListener(textWatcher)
+        binding.searchBar.addTextChangedListener(textWatcher)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -158,38 +128,40 @@ class SearchActivity : AppCompatActivity() {
         searchBar.setText(savedInstanceState.getString(PRODUCT_AMOUNT))
     }
 
-  //private fun visibilityPlaceHolders(truble: String) {
-  //    when (truble) {
-  //        "NoNetwork" -> {
-  //            buttonPlaceHolderNoNetwork.visibility = View.VISIBLE
-  //            textPlaceHolderNoNetwork.visibility = View.VISIBLE
-  //            imagePlaceHolderNoNetwork.visibility = View.VISIBLE
-  //            imagePlaceHolderNoResult.visibility = View.INVISIBLE
-  //            textPlaceHolderNoResult.visibility = View.INVISIBLE
-  //            recycle.visibility = View.INVISIBLE
-  //        }
-  //        "NoResult" -> {
-  //            imagePlaceHolderNoResult.visibility = View.VISIBLE
-  //            textPlaceHolderNoResult.visibility = View.VISIBLE
-  //            buttonPlaceHolderNoNetwork.visibility = View.INVISIBLE
-  //            textPlaceHolderNoNetwork.visibility = View.INVISIBLE
-  //            imagePlaceHolderNoNetwork.visibility = View.INVISIBLE
-  //            recycle.visibility = View.INVISIBLE
-  //        }
-  //        "UpdateSearch" -> {
-  //            imagePlaceHolderNoResult.visibility = View.INVISIBLE
-  //            textPlaceHolderNoResult.visibility = View.INVISIBLE
-  //            buttonPlaceHolderNoNetwork.visibility = View.INVISIBLE
-  //            textPlaceHolderNoNetwork.visibility = View.INVISIBLE
-  //            imagePlaceHolderNoNetwork.visibility = View.INVISIBLE
-  //            recycle.visibility = View.VISIBLE
-  //        }
-  //    }
-  //}
+    private fun visibilityPlaceHolders(trouble: String) {
+        when (trouble) {
+            "NoNetwork" -> {
+                binding.buttonUpdate.visibility = View.VISIBLE
+                binding.textPlaceHolderNoNetwork.visibility = View.VISIBLE
+                binding.imagePlaceHolderNoNetwork.visibility = View.VISIBLE
+                binding.imagePlaceHolderNoResults.visibility = View.INVISIBLE
+                binding.textPlaceHolderNoResults.visibility = View.INVISIBLE
+                binding.recycleView.visibility = View.INVISIBLE
+            }
 
+            "NoResult" -> {
+                binding.imagePlaceHolderNoResults.visibility = View.VISIBLE
+                binding.textPlaceHolderNoResults.visibility = View.VISIBLE
+                binding.buttonUpdate.visibility = View.INVISIBLE
+                binding.textPlaceHolderNoNetwork.visibility = View.INVISIBLE
+                binding.imagePlaceHolderNoNetwork.visibility = View.INVISIBLE
+                binding.recycleView.visibility = View.INVISIBLE
+            }
 
-    fun View.hideKeyboard() {
-        val inputManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            "UpdateSearch" -> {
+                binding.imagePlaceHolderNoResults.visibility = View.INVISIBLE
+                binding.textPlaceHolderNoResults.visibility = View.INVISIBLE
+                binding.buttonUpdate.visibility = View.INVISIBLE
+                binding.textPlaceHolderNoNetwork.visibility = View.INVISIBLE
+                binding.imagePlaceHolderNoNetwork.visibility = View.INVISIBLE
+                binding.recycleView.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    private fun View.hideKeyboard() {
+        val inputManager =
+            context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputManager.hideSoftInputFromWindow(windowToken, 0)
     }
 
@@ -206,6 +178,5 @@ class SearchActivity : AppCompatActivity() {
     companion object {
         private const val PRODUCT_AMOUNT = "PRODUCT_AMOUNT"
     }
-
 }
 

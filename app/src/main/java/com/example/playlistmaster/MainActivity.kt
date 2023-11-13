@@ -6,27 +6,26 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatDelegate
+import com.example.playlistmaster.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding : ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         checkTheme()
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val buttonSearch = findViewById<Button>(R.id.buttonSearch)
-        val buttonMedia = findViewById<Button>(R.id.buttonMedia)
-        val buttonSettings = findViewById<Button>(R.id.buttonSettings)
-
-        buttonMedia.setOnClickListener{
+        binding.buttonMedia.setOnClickListener{
             val buttonMediaIntent =Intent(this@MainActivity, MediaLibraryActivity::class.java)
             startActivity(buttonMediaIntent)
         }
 
-        buttonSearch.setOnClickListener{
+        binding.buttonSearch.setOnClickListener{
                 val buttonSearchIntent =Intent(this@MainActivity, SearchActivity::class.java)
                 startActivity(buttonSearchIntent)
         }
-        buttonSettings.setOnClickListener {
+        binding.buttonSettings.setOnClickListener {
                 val buttonSettingsIntent =Intent(this@MainActivity, SettingsActivity::class.java)
                 startActivity(buttonSettingsIntent)
         }

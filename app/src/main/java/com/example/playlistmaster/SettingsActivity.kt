@@ -10,22 +10,20 @@ import android.widget.ImageView
 import android.widget.Switch
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import com.example.playlistmaster.databinding.ActivitySettingsBinding
 
 
 class SettingsActivity : AppCompatActivity() {
+    private lateinit var binding : ActivitySettingsBinding
     private var positionSwitch = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         checkTheme()
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_settings)
+        binding = ActivitySettingsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val themeSwitch = findViewById<com.google.android.material.switchmaterial.SwitchMaterial>(R.id.themeSwitch)
-        themeSwitch.isChecked = positionSwitch
-        val buttonArrowBack = findViewById<ImageView>(R.id.arrow_back)
-        val buttonShare = findViewById<ImageView>(R.id.button_share)
-        val buttonSupport = findViewById<ImageView>(R.id.button_support)
-        val buttonUserAgreement = findViewById<ImageView>(R.id.user_agreement)
+        binding.themeSwitch.isChecked = positionSwitch
 
         val imageButtonClickListener: View.OnClickListener = View.OnClickListener { v ->
             when (v?.id) {
@@ -55,7 +53,7 @@ class SettingsActivity : AppCompatActivity() {
                     startActivity(browserIntent)
                 }
                 R.id.themeSwitch -> {
-                    if (themeSwitch.isChecked) {
+                    if (binding.themeSwitch.isChecked) {
                         checkTheme()
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                     } else {
@@ -65,11 +63,11 @@ class SettingsActivity : AppCompatActivity() {
                 }
             }
         }
-        buttonShare.setOnClickListener(imageButtonClickListener)
-        buttonArrowBack.setOnClickListener(imageButtonClickListener)
-        buttonSupport.setOnClickListener(imageButtonClickListener)
-        buttonUserAgreement.setOnClickListener(imageButtonClickListener)
-        themeSwitch.setOnClickListener(imageButtonClickListener)
+        binding.buttonShare.setOnClickListener(imageButtonClickListener)
+        binding.arrowBack.setOnClickListener(imageButtonClickListener)
+        binding.buttonSupport.setOnClickListener(imageButtonClickListener)
+        binding.userAgreement.setOnClickListener(imageButtonClickListener)
+        binding.themeSwitch.setOnClickListener(imageButtonClickListener)
     }
 
 
