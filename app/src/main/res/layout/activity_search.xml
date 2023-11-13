@@ -93,7 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:visibility="invisible"
+                android:visibility="visible"
                 android:layout_marginTop="102dp"
                 android:src="@drawable/placeholder_no_network"/>
 
@@ -104,7 +104,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/trouble_network"
-                android:visibility="invisible"
+                android:visibility="visible"
                 android:gravity="center_horizontal"
                 android:layout_marginTop="268dp"/>
 
@@ -114,7 +114,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="350dp"
-                android:visibility="invisible"
+                android:visibility="visible"
                 android:text="Обновить"
                 android:layout_gravity="center_horizontal"/>
 

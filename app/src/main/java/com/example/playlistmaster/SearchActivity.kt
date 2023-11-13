@@ -79,7 +79,6 @@ class SearchActivity : AppCompatActivity() {
             }
         }
 
-
         binding.buttonUpdate.setOnClickListener {
             request()
         }
