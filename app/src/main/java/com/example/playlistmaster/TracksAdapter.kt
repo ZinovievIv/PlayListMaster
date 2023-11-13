@@ -24,6 +24,7 @@ class TracksAdapter(private val listTracks: ArrayList<Track>, private val contex
 
     fun clearListTracks(listTracks: ArrayList<Track>) {
         listTracks.clear()
+        notifyDataSetChanged()
     }
 
 
