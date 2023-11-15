@@ -72,12 +72,12 @@ class SettingsActivity : AppCompatActivity() {
 
 
     private fun checkTheme() {
-        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+        positionSwitch = if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
             setTheme(R.style.Theme_PlaylistMasterNight)
-            positionSwitch = true
+            true
         } else {
             setTheme(R.style.Theme_PlaylistMaster)
-            positionSwitch = false
+            false
         }
     }
 
