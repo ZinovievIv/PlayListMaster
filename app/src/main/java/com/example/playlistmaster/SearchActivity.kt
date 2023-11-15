@@ -33,7 +33,6 @@ class SearchActivity : AppCompatActivity() {
     private val itunesService = retrofit.create(ItunesApi::class.java)
     private val adapter = TracksAdapter(trackList, this)
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         checkTheme()
@@ -104,6 +103,7 @@ class SearchActivity : AppCompatActivity() {
         val textWatcher = object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
+
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (p0.isNullOrEmpty()) {
                     binding.clearButton.visibility = View.GONE
@@ -112,6 +112,7 @@ class SearchActivity : AppCompatActivity() {
                 }
                 searchText = p0.toString()
             }
+
             override fun afterTextChanged(p0: Editable?) {
             }
         }
@@ -130,32 +131,34 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun visibilityPlaceHolders(trouble: String) {
-        when (trouble) {
-            "NoNetwork" -> {
-                binding.buttonUpdate.visibility = View.VISIBLE
-                binding.textPlaceHolderNoNetwork.visibility = View.VISIBLE
-                binding.imagePlaceHolderNoNetwork.visibility = View.VISIBLE
-                binding.imagePlaceHolderNoResults.visibility = View.INVISIBLE
-                binding.textPlaceHolderNoResults.visibility = View.INVISIBLE
-                binding.recycleView.visibility = View.INVISIBLE
-            }
+        with(binding) {
+            when (trouble) {
+                "NoNetwork" -> {
+                    buttonUpdate.visibility = View.VISIBLE
+                    textPlaceHolderNoNetwork.visibility = View.VISIBLE
+                    imagePlaceHolderNoNetwork.visibility = View.VISIBLE
+                    imagePlaceHolderNoResults.visibility = View.INVISIBLE
+                    textPlaceHolderNoResults.visibility = View.INVISIBLE
+                    recycleView.visibility = View.INVISIBLE
+                }
 
-            "NoResult" -> {
-                binding.imagePlaceHolderNoResults.visibility = View.VISIBLE
-                binding.textPlaceHolderNoResults.visibility = View.VISIBLE
-                binding.buttonUpdate.visibility = View.INVISIBLE
-                binding.textPlaceHolderNoNetwork.visibility = View.INVISIBLE
-                binding.imagePlaceHolderNoNetwork.visibility = View.INVISIBLE
-                binding.recycleView.visibility = View.INVISIBLE
-            }
+                "NoResult" -> {
+                    imagePlaceHolderNoResults.visibility = View.VISIBLE
+                    textPlaceHolderNoResults.visibility = View.VISIBLE
+                    buttonUpdate.visibility = View.INVISIBLE
+                    textPlaceHolderNoNetwork.visibility = View.INVISIBLE
+                    imagePlaceHolderNoNetwork.visibility = View.INVISIBLE
+                    recycleView.visibility = View.INVISIBLE
+                }
 
-            "UpdateSearch" -> {
-                binding.imagePlaceHolderNoResults.visibility = View.INVISIBLE
-                binding.textPlaceHolderNoResults.visibility = View.INVISIBLE
-                binding.buttonUpdate.visibility = View.INVISIBLE
-                binding.textPlaceHolderNoNetwork.visibility = View.INVISIBLE
-                binding.imagePlaceHolderNoNetwork.visibility = View.INVISIBLE
-                binding.recycleView.visibility = View.VISIBLE
+                "UpdateSearch" -> {
+                    imagePlaceHolderNoResults.visibility = View.INVISIBLE
+                    textPlaceHolderNoResults.visibility = View.INVISIBLE
+                    buttonUpdate.visibility = View.INVISIBLE
+                    textPlaceHolderNoNetwork.visibility = View.INVISIBLE
+                    imagePlaceHolderNoNetwork.visibility = View.INVISIBLE
+                    recycleView.visibility = View.VISIBLE
+                }
             }
         }
     }

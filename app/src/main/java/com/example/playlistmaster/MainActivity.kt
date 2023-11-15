@@ -10,6 +10,7 @@ import com.example.playlistmaster.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         checkTheme()
         super.onCreate(savedInstanceState)
@@ -20,7 +21,6 @@ class MainActivity : AppCompatActivity() {
             val buttonMediaIntent =Intent(this@MainActivity, MediaLibraryActivity::class.java)
             startActivity(buttonMediaIntent)
         }
-
         binding.buttonSearch.setOnClickListener{
                 val buttonSearchIntent =Intent(this@MainActivity, SearchActivity::class.java)
                 startActivity(buttonSearchIntent)
