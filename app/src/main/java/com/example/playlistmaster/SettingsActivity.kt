@@ -12,16 +12,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.example.playlistmaster.databinding.ActivitySettingsBinding
 
-
 class SettingsActivity : AppCompatActivity() {
     private lateinit var binding : ActivitySettingsBinding
     private var positionSwitch = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        checkTheme()
+        val sharePref = getSharedPreferences(SETTINGS, MODE_PRIVATE)
+        (applicationContext as App).switchTheme(sharePref.getBoolean(THEME_SWITCH_POSITION, true))
         super.onCreate(savedInstanceState)
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
 
         binding.themeSwitch.isChecked = positionSwitch
 
@@ -30,6 +31,7 @@ class SettingsActivity : AppCompatActivity() {
                 R.id.arrow_back -> {
                     finish()
                 }
+
                 R.id.button_share -> {
                     val sendIntent: Intent = Intent().apply {
                         action = Intent.ACTION_SEND
@@ -39,6 +41,7 @@ class SettingsActivity : AppCompatActivity() {
                     val shareIntent = Intent.createChooser(sendIntent, null)
                     startActivity(shareIntent)
                 }
+
                 R.id.button_support -> {
                     val message = getString(R.string.templeteTextMessage)
                     val messageInTheme = getString(R.string.templeteThemeMessage)
@@ -48,26 +51,37 @@ class SettingsActivity : AppCompatActivity() {
                     shareIntent.putExtra(Intent.EXTRA_TEXT, message)
                     startActivity(shareIntent)
                 }
+
                 R.id.user_agreement -> {
-                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.offer)))
+                    val browserIntent =
+                        Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.offer)))
                     startActivity(browserIntent)
                 }
-                R.id.themeSwitch -> {
-                    if (binding.themeSwitch.isChecked) {
-                        checkTheme()
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                    } else {
-                        checkTheme()
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                    }
-                }
+                //R.id.themeSwitch -> {
+                //    if (binding.themeSwitch.isChecked) {
+                //        sharePref.edit().putBoolean(THEME_SWITCH_POSITION, true).apply()
+//
+                //    } else {
+                //        sharePref.edit().putBoolean(THEME_SWITCH_POSITION, false).apply()
+                //        //    checkTheme()
+                //        //    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                //        //} else {
+                //        //    checkTheme()
+                //        //    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                //        //}
+                //    }
+                //}
             }
         }
         binding.buttonShare.setOnClickListener(imageButtonClickListener)
         binding.arrowBack.setOnClickListener(imageButtonClickListener)
         binding.buttonSupport.setOnClickListener(imageButtonClickListener)
         binding.userAgreement.setOnClickListener(imageButtonClickListener)
-        binding.themeSwitch.setOnClickListener(imageButtonClickListener)
+        binding.themeSwitch.setOnCheckedChangeListener { switcher, checked ->
+            Log.i("TEST", "$checked")
+                sharePref.edit().putBoolean(THEME_SWITCH_POSITION, checked).apply()
+                (applicationContext as App).switchTheme(checked)
+        }
     }
 
 
@@ -80,5 +94,4 @@ class SettingsActivity : AppCompatActivity() {
             false
         }
     }
-
 }
