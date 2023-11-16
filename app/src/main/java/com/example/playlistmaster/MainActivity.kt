@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        checkTheme()
+
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -28,16 +28,6 @@ class MainActivity : AppCompatActivity() {
         binding.buttonSettings.setOnClickListener {
                 val buttonSettingsIntent =Intent(this@MainActivity, SettingsActivity::class.java)
                 startActivity(buttonSettingsIntent)
-        }
-    }
-
-    private fun checkTheme() {
-        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-            setTheme(R.style.Theme_PlaylistMasterNight)
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        } else {
-            setTheme(R.style.Theme_PlaylistMaster)
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
     }
 }

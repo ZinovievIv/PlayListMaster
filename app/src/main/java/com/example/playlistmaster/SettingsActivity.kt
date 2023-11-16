@@ -10,26 +10,27 @@ import android.widget.ImageView
 import android.widget.Switch
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.NightMode
 import com.example.playlistmaster.databinding.ActivitySettingsBinding
-
+import com.google.android.material.switchmaterial.SwitchMaterial
 
 class SettingsActivity : AppCompatActivity() {
-    private lateinit var binding : ActivitySettingsBinding
-    private var positionSwitch = false
-
+    private lateinit var binding: ActivitySettingsBinding
+    private lateinit var themeSwitch: SwitchMaterial
     override fun onCreate(savedInstanceState: Bundle?) {
-        checkTheme()
         super.onCreate(savedInstanceState)
         binding = ActivitySettingsBinding.inflate(layoutInflater)
+        themeSwitch = binding.themeSwitch
+        val sharPref = getSharedPreferences(SETTINGS, MODE_PRIVATE)
+        checkTheme()
         setContentView(binding.root)
-
-        binding.themeSwitch.isChecked = positionSwitch
 
         val imageButtonClickListener: View.OnClickListener = View.OnClickListener { v ->
             when (v?.id) {
                 R.id.arrow_back -> {
                     finish()
                 }
+
                 R.id.button_share -> {
                     val sendIntent: Intent = Intent().apply {
                         action = Intent.ACTION_SEND
@@ -39,6 +40,7 @@ class SettingsActivity : AppCompatActivity() {
                     val shareIntent = Intent.createChooser(sendIntent, null)
                     startActivity(shareIntent)
                 }
+
                 R.id.button_support -> {
                     val message = getString(R.string.templeteTextMessage)
                     val messageInTheme = getString(R.string.templeteThemeMessage)
@@ -48,18 +50,11 @@ class SettingsActivity : AppCompatActivity() {
                     shareIntent.putExtra(Intent.EXTRA_TEXT, message)
                     startActivity(shareIntent)
                 }
+
                 R.id.user_agreement -> {
-                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.offer)))
+                    val browserIntent =
+                        Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.offer)))
                     startActivity(browserIntent)
-                }
-                R.id.themeSwitch -> {
-                    if (binding.themeSwitch.isChecked) {
-                        checkTheme()
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                    } else {
-                        checkTheme()
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                    }
                 }
             }
         }
@@ -67,18 +62,16 @@ class SettingsActivity : AppCompatActivity() {
         binding.arrowBack.setOnClickListener(imageButtonClickListener)
         binding.buttonSupport.setOnClickListener(imageButtonClickListener)
         binding.userAgreement.setOnClickListener(imageButtonClickListener)
-        binding.themeSwitch.setOnClickListener(imageButtonClickListener)
+        binding.themeSwitch.setOnCheckedChangeListener { switcher, checked ->
+            (applicationContext as App).switchTheme(checked)
+            sharPref.edit().putBoolean(THEME_SWITCH_POSITION, checked).apply()
+            Log.i("Theme", "$checked")
+        }
     }
 
 
     private fun checkTheme() {
-        positionSwitch = if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-            setTheme(R.style.Theme_PlaylistMasterNight)
-            true
-        } else {
-            setTheme(R.style.Theme_PlaylistMaster)
-            false
-        }
+        themeSwitch.isChecked = AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES
     }
-
 }
+
