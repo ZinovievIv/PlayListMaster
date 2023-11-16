@@ -21,6 +21,7 @@ class SettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         themeSwitch = binding.themeSwitch
+        val sharPref = getSharedPreferences(SETTINGS, MODE_PRIVATE)
         checkTheme()
         setContentView(binding.root)
 
@@ -63,6 +64,7 @@ class SettingsActivity : AppCompatActivity() {
         binding.userAgreement.setOnClickListener(imageButtonClickListener)
         binding.themeSwitch.setOnCheckedChangeListener { switcher, checked ->
             (applicationContext as App).switchTheme(checked)
+            sharPref.edit().putBoolean(THEME_SWITCH_POSITION, checked).apply()
             Log.i("Theme", "$checked")
         }
     }
