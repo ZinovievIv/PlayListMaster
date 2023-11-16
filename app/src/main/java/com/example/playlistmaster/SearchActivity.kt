@@ -35,7 +35,6 @@ class SearchActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        checkTheme()
         binding = ActivitySearchBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
@@ -169,15 +168,6 @@ class SearchActivity : AppCompatActivity() {
         inputManager.hideSoftInputFromWindow(windowToken, 0)
     }
 
-    private fun checkTheme() {
-        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-            setTheme(R.style.Theme_PlaylistMasterNight)
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        } else {
-            setTheme(R.style.Theme_PlaylistMaster)
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        }
-    }
 
     companion object {
         private const val PRODUCT_AMOUNT = "PRODUCT_AMOUNT"

@@ -10,21 +10,19 @@ import android.widget.ImageView
 import android.widget.Switch
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.NightMode
 import com.example.playlistmaster.databinding.ActivitySettingsBinding
+import com.google.android.material.switchmaterial.SwitchMaterial
 
 class SettingsActivity : AppCompatActivity() {
-    private lateinit var binding : ActivitySettingsBinding
-    private var positionSwitch = false
-
+    private lateinit var binding: ActivitySettingsBinding
+    private lateinit var themeSwitch: SwitchMaterial
     override fun onCreate(savedInstanceState: Bundle?) {
-        val sharePref = getSharedPreferences(SETTINGS, MODE_PRIVATE)
-        (applicationContext as App).switchTheme(sharePref.getBoolean(THEME_SWITCH_POSITION, true))
         super.onCreate(savedInstanceState)
         binding = ActivitySettingsBinding.inflate(layoutInflater)
+        themeSwitch = binding.themeSwitch
+        checkTheme()
         setContentView(binding.root)
-
-
-        binding.themeSwitch.isChecked = positionSwitch
 
         val imageButtonClickListener: View.OnClickListener = View.OnClickListener { v ->
             when (v?.id) {
@@ -57,20 +55,6 @@ class SettingsActivity : AppCompatActivity() {
                         Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.offer)))
                     startActivity(browserIntent)
                 }
-                //R.id.themeSwitch -> {
-                //    if (binding.themeSwitch.isChecked) {
-                //        sharePref.edit().putBoolean(THEME_SWITCH_POSITION, true).apply()
-//
-                //    } else {
-                //        sharePref.edit().putBoolean(THEME_SWITCH_POSITION, false).apply()
-                //        //    checkTheme()
-                //        //    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                //        //} else {
-                //        //    checkTheme()
-                //        //    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                //        //}
-                //    }
-                //}
             }
         }
         binding.buttonShare.setOnClickListener(imageButtonClickListener)
@@ -78,20 +62,14 @@ class SettingsActivity : AppCompatActivity() {
         binding.buttonSupport.setOnClickListener(imageButtonClickListener)
         binding.userAgreement.setOnClickListener(imageButtonClickListener)
         binding.themeSwitch.setOnCheckedChangeListener { switcher, checked ->
-            Log.i("TEST", "$checked")
-                sharePref.edit().putBoolean(THEME_SWITCH_POSITION, checked).apply()
-                (applicationContext as App).switchTheme(checked)
+            (applicationContext as App).switchTheme(checked)
+            Log.i("Theme", "$checked")
         }
     }
 
 
     private fun checkTheme() {
-        positionSwitch = if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-            setTheme(R.style.Theme_PlaylistMasterNight)
-            true
-        } else {
-            setTheme(R.style.Theme_PlaylistMaster)
-            false
-        }
+        themeSwitch.isChecked = AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES
     }
 }
+

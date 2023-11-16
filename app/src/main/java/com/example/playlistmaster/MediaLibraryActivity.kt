@@ -7,18 +7,7 @@ import androidx.appcompat.app.AppCompatDelegate
 class MediaLibraryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        checkTheme()
         setContentView(R.layout.activity_media_library)
-    }
-
-    private fun checkTheme() {
-        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-            setTheme(R.style.Theme_PlaylistMasterNight)
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        } else {
-            setTheme(R.style.Theme_PlaylistMaster)
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        }
     }
 
 }
