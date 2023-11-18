@@ -1,12 +1,17 @@
 package com.example.playlistmaster
 
 import android.content.Context
+import android.content.SharedPreferences
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-
+import com.google.gson.Gson
 class TracksAdapter(private val listTracks: ArrayList<Track>, private val context: Context) :
     RecyclerView.Adapter<TracksViewHolder>() {
+
+    val pref = TrackSharedPreferences()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TracksViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.track_for_recycle_view, parent,false)
         return TracksViewHolder(view, context)
@@ -15,7 +20,7 @@ class TracksAdapter(private val listTracks: ArrayList<Track>, private val contex
     override fun onBindViewHolder(holder: TracksViewHolder, position: Int) {
         holder.bind(listTracks[position])
         holder.itemView.setOnClickListener {
-
+            Log.i("TrackAdapter", "Click on track in search")
         }
     }
 

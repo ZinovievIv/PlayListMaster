@@ -34,6 +34,7 @@ class SearchActivity : AppCompatActivity() {
     private val adapter = TracksAdapter(trackList, this)
     private val adapterHistory = TracksHistoryAdapter(trackListHistory, this)
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySearchBinding.inflate(layoutInflater)
@@ -102,6 +103,7 @@ class SearchActivity : AppCompatActivity() {
 
         binding.arrowBack.setOnClickListener {
             finish()
+
         }
 
         val textWatcher = object : TextWatcher {
