@@ -14,6 +14,9 @@ class TracksAdapter(private val listTracks: ArrayList<Track>, private val contex
     override fun getItemCount() = listTracks.size
     override fun onBindViewHolder(holder: TracksViewHolder, position: Int) {
         holder.bind(listTracks[position])
+        holder.itemView.setOnClickListener {
+
+        }
     }
 
     fun updateTracks(newTracks: List<Track>) {

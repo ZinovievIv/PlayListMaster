@@ -23,6 +23,7 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySearchBinding
 
     private var trackList = ArrayList<Track>()
+    private var trackListHistory = ArrayList<Track>()
     private var searchText = ""
     private val itunesBaseUrl = "https://itunes.apple.com"
     private val retrofit = Retrofit.Builder()
@@ -31,6 +32,7 @@ class SearchActivity : AppCompatActivity() {
         .build()
     private val itunesService = retrofit.create(ItunesApi::class.java)
     private val adapter = TracksAdapter(trackList, this)
+    private val adapterHistory = TracksHistoryAdapter(trackListHistory, this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +43,10 @@ class SearchActivity : AppCompatActivity() {
         val recycle = binding.recycleView
         recycle.layoutManager = LinearLayoutManager(this)
         recycle.adapter = adapter
+
+        val recyclerHostory = binding.recycleViewHistory
+        recycle.layoutManager = LinearLayoutManager(this)
+        recyclerHostory.adapter = adapterHistory
 
         fun request() {
             searchText = binding.searchBar.text.toString()
