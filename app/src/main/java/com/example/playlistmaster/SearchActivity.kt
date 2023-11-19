@@ -1,6 +1,7 @@
 package com.example.playlistmaster
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -31,17 +32,17 @@ class SearchActivity : AppCompatActivity() {
         .build()
     private val itunesService = retrofit.create(ItunesApi::class.java)
     private val adapter = TracksAdapter(trackList, this)
+    private val adapterHistory = TracksHistoryAdapter(SearchHistory.historyTracksList, this)
     private var searchHistoryList = SearchHistory.historyTracksList
-    private val adapterHistory = TracksHistoryAdapter(searchHistoryList, this)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySearchBinding.inflate(layoutInflater)
         val view = binding.root
-        setContentView(view)
-
         val sharedPreferencesHistory = getSharedPreferences(HISTORY_SEARCH, MODE_PRIVATE)
+        SearchHistory.readSharedPref(sharedPreferencesHistory)
+        setContentView(view)
 
         val recycle = binding.recycleView
         recycle.layoutManager = LinearLayoutManager(this)
@@ -70,16 +71,16 @@ class SearchActivity : AppCompatActivity() {
                                         }
                                     }
                                     Log.i("Network", "$trackList")
-                                    visibilityPlaceHolders("UpdateSearch")
+                                    visibilityViews("UpdateSearch")
                                 }
                                 if (trackList.isEmpty()) {
-                                    visibilityPlaceHolders("NoResult")
+                                    visibilityViews("NoResult")
                                 }
                             }
                         }
 
                         override fun onFailure(call: Call<TrackResponse>, t: Throwable) {
-                            visibilityPlaceHolders("NoNetwork")
+                            visibilityViews("NoNetwork")
                         }
                     })
             }
@@ -100,12 +101,12 @@ class SearchActivity : AppCompatActivity() {
             binding.searchBar.setText("")
             binding.searchBar.hideKeyboard()
             adapter.clearListTracks(trackList)
-            visibilityPlaceHolders("UpdateSearch")
+            visibilityViews("UpdateSearch")
         }
 
         binding.arrowBack.setOnClickListener {
             //finish()
-            //adapterHistory.updateTracks(searchHistoryList)
+            adapterHistory.updateTracks(searchHistoryList)
             binding.recycleView.visibility = View.INVISIBLE
             binding.recycleViewHistory.visibility = View.VISIBLE
 
@@ -133,7 +134,7 @@ class SearchActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
-        val sharedPreferences = getSharedPreferences(HISTORYTRACKSKEY, MODE_PRIVATE)
+        val sharedPreferences = getSharedPreferences(HISTORY_SEARCH, MODE_PRIVATE)
         SearchHistory.writeSharedPref(sharedPreferences)
     }
 
@@ -150,7 +151,7 @@ class SearchActivity : AppCompatActivity() {
         searchBar.setText(savedInstanceState.getString(PRODUCT_AMOUNT))
     }
 
-    private fun visibilityPlaceHolders(trouble: String) {
+    private fun visibilityViews(trouble: String) {
         with(binding) {
             when (trouble) {
                 "NoNetwork" -> {
@@ -182,6 +183,7 @@ class SearchActivity : AppCompatActivity() {
             }
         }
     }
+
 
     private fun View.hideKeyboard() {
         val inputManager =

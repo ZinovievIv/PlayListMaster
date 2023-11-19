@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class TracksHistoryAdapter(private val historyTracksList: ArrayList<Track>,
+class TracksHistoryAdapter(private val historyTracksList: MutableList<Track>,
                            private val context: Context) : RecyclerView.Adapter<TracksViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TracksViewHolder {
         val view = LayoutInflater.from(parent.context)
