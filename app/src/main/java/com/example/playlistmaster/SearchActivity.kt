@@ -31,7 +31,7 @@ class SearchActivity : AppCompatActivity() {
         .build()
     private val itunesService = retrofit.create(ItunesApi::class.java)
     private val adapter = TracksAdapter(trackList, this)
-    private val searchHistoryList = SearchHistory.historyTracksList
+    private var searchHistoryList = SearchHistory.historyTracksList
     private val adapterHistory = TracksHistoryAdapter(searchHistoryList, this)
 
 
@@ -107,7 +107,6 @@ class SearchActivity : AppCompatActivity() {
             //finish()
             //adapterHistory.updateTracks(searchHistoryList)
             binding.recycleView.visibility = View.INVISIBLE
-            Log.i("List Search", "${searchHistoryList}")
             binding.recycleViewHistory.visibility = View.VISIBLE
 
         }
@@ -119,6 +118,7 @@ class SearchActivity : AppCompatActivity() {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (p0.isNullOrEmpty()) {
                     binding.clearButton.visibility = View.GONE
+
                 } else {
                     binding.clearButton.visibility = View.VISIBLE
                 }
@@ -130,6 +130,14 @@ class SearchActivity : AppCompatActivity() {
         }
         binding.searchBar.addTextChangedListener(textWatcher)
     }
+
+    override fun onStop() {
+        super.onStop()
+        val sharedPreferences = getSharedPreferences(HISTORYTRACKSKEY, MODE_PRIVATE)
+        SearchHistory.writeSharedPref(sharedPreferences)
+    }
+
+
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
