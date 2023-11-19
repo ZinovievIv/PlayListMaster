@@ -107,6 +107,7 @@ class SearchActivity : AppCompatActivity() {
         binding.arrowBack.setOnClickListener {
             //finish()
             adapterHistory.updateTracks(searchHistoryList)
+            Log.i("List", "${SearchHistory.historyTracksList}")
             binding.recycleView.visibility = View.INVISIBLE
             binding.recycleViewHistory.visibility = View.VISIBLE
 
