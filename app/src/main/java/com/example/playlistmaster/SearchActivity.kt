@@ -1,6 +1,6 @@
 package com.example.playlistmaster
 
-import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -10,7 +10,6 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.playlistmaster.databinding.ActivitySearchBinding
 import retrofit2.Call
@@ -19,11 +18,11 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+
 class SearchActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySearchBinding
 
     private var trackList = ArrayList<Track>()
-    private var trackListHistory = ArrayList<Track>()
     private var searchText = ""
     private val itunesBaseUrl = "https://itunes.apple.com"
     private val retrofit = Retrofit.Builder()
@@ -32,7 +31,8 @@ class SearchActivity : AppCompatActivity() {
         .build()
     private val itunesService = retrofit.create(ItunesApi::class.java)
     private val adapter = TracksAdapter(trackList, this)
-    private val adapterHistory = TracksHistoryAdapter(trackListHistory, this)
+    private val searchHistoryList = SearchHistory.historyTracksList
+    private val adapterHistory = TracksHistoryAdapter(searchHistoryList, this)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,13 +41,15 @@ class SearchActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        val sharedPreferencesHistory = getSharedPreferences(HISTORY_SEARCH, MODE_PRIVATE)
+
         val recycle = binding.recycleView
         recycle.layoutManager = LinearLayoutManager(this)
         recycle.adapter = adapter
 
-        val recyclerHostory = binding.recycleViewHistory
-        recycle.layoutManager = LinearLayoutManager(this)
-        recyclerHostory.adapter = adapterHistory
+        val recyclerHistory = binding.recycleViewHistory
+        recyclerHistory.layoutManager = LinearLayoutManager(this)
+        recyclerHistory.adapter = adapterHistory
 
         fun request() {
             searchText = binding.searchBar.text.toString()
@@ -102,7 +104,11 @@ class SearchActivity : AppCompatActivity() {
         }
 
         binding.arrowBack.setOnClickListener {
-            finish()
+            //finish()
+            //adapterHistory.updateTracks(searchHistoryList)
+            binding.recycleView.visibility = View.INVISIBLE
+            Log.i("List Search", "${searchHistoryList}")
+            binding.recycleViewHistory.visibility = View.VISIBLE
 
         }
 

@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatDelegate
 
 const val SETTINGS = "settings"
 const val THEME_SWITCH_POSITION = "theme_switch_position"
+const val HISTORY_SEARCH = "search_history"
 
 class App: Application() {
     private var darkTheme = false
+
 
     override fun onCreate() {
         super.onCreate()
