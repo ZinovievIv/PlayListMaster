@@ -13,31 +13,41 @@ object SearchHistory {
 
     var historyTracksList = mutableListOf<Track>()
 
-    private fun historyTracksToJson() : String {
+    private fun historyTracksToJson(): String {
         return Gson().toJson(historyTracksList)
     }
 
-    private fun historyTracksFromJson(json : String) : Array<Track>? {
+    private fun historyTracksFromJson(json: String): Array<Track>? {
         return Gson().fromJson(json, Array<Track>::class.java)
     }
 
     fun readSharedPref(sharedPreferences: SharedPreferences) {
         var getInfo = sharedPreferences.getString(HISTORYTRACKSKEY, "")
-        Log.i("Gettt", "Get + ${getInfo.toString()}")
-        if (getInfo.isNullOrEmpty()){
-            historyTracksList = mutableListOf<Track>()
+        historyTracksList = if (getInfo.isNullOrEmpty()) {
+            mutableListOf<Track>()
         } else {
-            historyTracksList = historyTracksFromJson(getInfo)?.toMutableList()!!
+            historyTracksFromJson(getInfo)?.toMutableList()!!
         }
     }
 
     fun writeSharedPref(sharedPreferences: SharedPreferences) {
         sharedPreferences.edit().putString(HISTORYTRACKSKEY, historyTracksToJson()).apply()
-        Log.i("SharedPreference", "Записан список истории треков ${historyTracksList}")
     }
 
     fun addTrack(newTrack: Track) {
-        historyTracksList.add(newTrack)
+        if (historyTracksList.isNotEmpty()) {
+            for (track in historyTracksList) {
+                Log.i("Track", "${track.trackId}")
+                Log.i("Track", "${newTrack.trackId}")
+                if (newTrack.trackId == track.trackId) {
+                    Log.i("Track", "Не добавлено")
+                } else {
+                    historyTracksList.add(newTrack)
+                    Log.i("Track", "Добавлен")
+                }
+            }
+        } else {
+            historyTracksList.add(newTrack)
+        }
     }
-
 }

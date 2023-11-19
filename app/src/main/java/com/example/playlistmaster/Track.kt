@@ -13,7 +13,9 @@ data class Track(
     @SerializedName("trackTimeMillis")
     val trackTimeMillis: Long,
     @SerializedName("artworkUrl100")
-    val imageAlbumURL: String
+    val imageAlbumURL: String,
+    @SerializedName("trackId")
+    val trackId: Long
 ) {
     fun getFormattedTrackTime(): String {
         return SimpleDateFormat("mm:ss", Locale.getDefault()).format(trackTimeMillis)

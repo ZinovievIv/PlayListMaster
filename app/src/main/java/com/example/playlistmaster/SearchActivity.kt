@@ -33,7 +33,6 @@ class SearchActivity : AppCompatActivity() {
     private val itunesService = retrofit.create(ItunesApi::class.java)
     private val adapter = TracksAdapter(trackList, this)
     private val adapterHistory = TracksHistoryAdapter(SearchHistory.historyTracksList, this)
-    private var searchHistoryList = SearchHistory.historyTracksList
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,7 +61,7 @@ class SearchActivity : AppCompatActivity() {
                             response: Response<TrackResponse>
                         ) {
                             if (response.code() == 200) {
-                                Log.i("Network", "${response.code()}")
+                                Log.i("Network", "${response.body()}")
                                 adapter.clearListTracks(trackList)
                                 if (response.body()?.results?.isNotEmpty() == true) {
                                     recycle.adapter?.let {
@@ -70,8 +69,6 @@ class SearchActivity : AppCompatActivity() {
                                             it.updateTracks(response.body()?.results!!)
                                         }
                                     }
-                                    Log.i("Network", "$trackList")
-                                    visibilityViews("UpdateSearch")
                                 }
                                 if (trackList.isEmpty()) {
                                     visibilityViews("NoResult")
@@ -101,16 +98,10 @@ class SearchActivity : AppCompatActivity() {
             binding.searchBar.setText("")
             binding.searchBar.hideKeyboard()
             adapter.clearListTracks(trackList)
-            visibilityViews("UpdateSearch")
         }
 
         binding.arrowBack.setOnClickListener {
-            //finish()
-            adapterHistory.updateTracks(searchHistoryList)
-            Log.i("List", "${SearchHistory.historyTracksList}")
-            binding.recycleView.visibility = View.INVISIBLE
-            binding.recycleViewHistory.visibility = View.VISIBLE
-
+            finish()
         }
 
         val textWatcher = object : TextWatcher {
@@ -120,7 +111,8 @@ class SearchActivity : AppCompatActivity() {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (p0.isNullOrEmpty()) {
                     binding.clearButton.visibility = View.GONE
-
+                    binding.recycleViewHistory.visibility = if (binding.searchBar.hasFocus()) View.INVISIBLE else View.VISIBLE
+                    binding.recycleView.visibility = if (binding.searchBar.hasFocus()) View.VISIBLE else View.INVISIBLE
                 } else {
                     binding.clearButton.visibility = View.VISIBLE
                 }
@@ -130,12 +122,17 @@ class SearchActivity : AppCompatActivity() {
             override fun afterTextChanged(p0: Editable?) {
             }
         }
+        binding.searchBar.setOnFocusChangeListener{view, hasFocus ->
+            Log.i("List", "${SearchHistory.historyTracksList}")
+            binding.recycleViewHistory.visibility = if (hasFocus) View.INVISIBLE else View.VISIBLE
+            binding.recycleView.visibility = if (hasFocus) View.VISIBLE else View.INVISIBLE
+        }
         binding.searchBar.addTextChangedListener(textWatcher)
     }
 
     override fun onStop() {
         super.onStop()
-        val sharedPreferences = getSharedPreferences(HISTORY_SEARCH, MODE_PRIVATE)
+        val sharedPreferences = getSharedPreferences(HISTORYTRACKS, MODE_PRIVATE)
         SearchHistory.writeSharedPref(sharedPreferences)
     }
 
@@ -163,7 +160,6 @@ class SearchActivity : AppCompatActivity() {
                     textPlaceHolderNoResults.visibility = View.INVISIBLE
                     recycleView.visibility = View.INVISIBLE
                 }
-
                 "NoResult" -> {
                     imagePlaceHolderNoResults.visibility = View.VISIBLE
                     textPlaceHolderNoResults.visibility = View.VISIBLE
@@ -172,7 +168,6 @@ class SearchActivity : AppCompatActivity() {
                     imagePlaceHolderNoNetwork.visibility = View.INVISIBLE
                     recycleView.visibility = View.INVISIBLE
                 }
-
                 "UpdateSearch" -> {
                     imagePlaceHolderNoResults.visibility = View.INVISIBLE
                     textPlaceHolderNoResults.visibility = View.INVISIBLE
@@ -181,6 +176,10 @@ class SearchActivity : AppCompatActivity() {
                     imagePlaceHolderNoNetwork.visibility = View.INVISIBLE
                     recycleView.visibility = View.VISIBLE
                 }
+                "HistoryView" -> {
+                    recycleViewHistory.visibility = View.VISIBLE
+                }
+
             }
         }
     }

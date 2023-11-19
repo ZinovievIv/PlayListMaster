@@ -12,11 +12,6 @@ class TracksAdapter(private val listTracks: ArrayList<Track>,
                     private val context: Context) :
     RecyclerView.Adapter<TracksViewHolder>() {
 
-    private val historyTrackList = SearchHistory
-
-
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TracksViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.track_for_recycle_view, parent,false)
         return TracksViewHolder(view, context)
@@ -26,10 +21,8 @@ class TracksAdapter(private val listTracks: ArrayList<Track>,
         val track = listTracks[position]
         holder.bind(track)
         holder.itemView.setOnClickListener {
-            historyTrackList.addTrack(track)
-            Log.i("List", "${historyTrackList.hashCode()}")
-            Log.i("List", "$historyTrackList")
-
+            SearchHistory.addTrack(track)
+            Log.i("Track", "В адаптере ${SearchHistory.historyTracksList}")
         }
     }
 
