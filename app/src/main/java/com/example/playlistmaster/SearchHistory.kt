@@ -45,7 +45,6 @@ object SearchHistory {
             historyTracksList.add(newTrack)
         } else {
             historyTracksList.add(newTrack)
-            //}
         }
     }
 }
