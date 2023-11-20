@@ -22,14 +22,14 @@ class TracksHistoryAdapter(private val historyTracksList: MutableList<Track>,
         }
     }
 
-   fun updateTracks(newTracks: List<Track>) {
-       historyTracksList.clear()
-       historyTracksList.addAll(newTracks)
-       notifyDataSetChanged()
-   }
+    fun updateAdapter() {
+        notifyDataSetChanged()
+    }
 
-    //fun remoteAll() {
-    //    SearchHistory.historyTracksList.clear()
-    //    notifyDataSetChanged()
-    //}
+    fun clearListTracks() {
+        historyTracksList.clear()
+        SearchHistory.historyTracksList.clear()
+        notifyDataSetChanged()
+    }
+
 }

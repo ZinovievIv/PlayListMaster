@@ -42,6 +42,7 @@ class SearchActivity : AppCompatActivity() {
         val sharedPreferencesHistory = getSharedPreferences(HISTORYTRACKS, MODE_PRIVATE)
         SearchHistory.readSharedPref(sharedPreferencesHistory)
         binding = ActivitySearchBinding.inflate(layoutInflater)
+        visibilityViews("StartSearchActivity")
         val view = binding.root
         setContentView(view)
 
@@ -100,10 +101,13 @@ class SearchActivity : AppCompatActivity() {
             binding.searchBar.setText("")
             binding.searchBar.hideKeyboard()
             adapter.clearListTracks(trackList)
+            adapterHistory.updateAdapter()
+            visibilityViews("StartSearchActivity")
         }
 
-        binding.clearehistory.setOnClickListener{
-            //adapterHistory.remoteAll()
+        binding.clearhistory.setOnClickListener{
+            adapterHistory.clearListTracks()
+            visibilityViews("StartSearchActivity")
         }
 
         binding.arrowBack.setOnClickListener {
@@ -120,7 +124,7 @@ class SearchActivity : AppCompatActivity() {
                     binding.recycleViewHistory.visibility = if (binding.searchBar.hasFocus()) View.INVISIBLE else View.VISIBLE
                     binding.recycleView.visibility = if (binding.searchBar.hasFocus()) View.VISIBLE else View.INVISIBLE
                     binding.searchHistoryNotif.visibility = if (binding.searchHistoryNotif.hasFocus()) View.INVISIBLE else View.VISIBLE
-                    binding.clearehistory.visibility = if (binding.clearehistory.hasFocus()) View.INVISIBLE else View.VISIBLE
+                    binding.clearhistory.visibility = if (binding.clearhistory.hasFocus()) View.INVISIBLE else View.VISIBLE
                 } else {
                     binding.clearButton.visibility = View.VISIBLE
                 }
@@ -135,7 +139,7 @@ class SearchActivity : AppCompatActivity() {
             binding.recycleViewHistory.visibility = if (hasFocus) View.INVISIBLE else View.VISIBLE
             binding.recycleView.visibility = if (hasFocus) View.VISIBLE else View.INVISIBLE
             binding.searchHistoryNotif.visibility = if (hasFocus) View.INVISIBLE else View.VISIBLE
-            binding.clearehistory.visibility = if (hasFocus) View.INVISIBLE else View.VISIBLE
+            binding.clearhistory.visibility = if (hasFocus) View.INVISIBLE else View.VISIBLE
         }
         binding.searchBar.addTextChangedListener(textWatcher)
     }
@@ -146,8 +150,6 @@ class SearchActivity : AppCompatActivity() {
         SearchHistory.writeSharedPref(sharedPreferences)
         Log.i("Track", "Записаны треки в память - ${SearchHistory.historyTracksList}")
     }
-
-
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
@@ -189,6 +191,17 @@ class SearchActivity : AppCompatActivity() {
                 }
                 "HistoryView" -> {
                     recycleViewHistory.visibility = View.VISIBLE
+                }
+                "StartSearchActivity" -> {
+                    if(SearchHistory.historyTracksList.size == 0) {
+                        searchHistoryNotif.visibility = View.INVISIBLE
+                        clearhistory.visibility = View.INVISIBLE
+                        recycleViewHistory.visibility = View.INVISIBLE
+                    } else {
+                        searchHistoryNotif.visibility = View.VISIBLE
+                        clearhistory.visibility = View.VISIBLE
+                        recycleViewHistory.visibility = View.VISIBLE
+                    }
                 }
 
             }

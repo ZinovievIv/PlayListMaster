@@ -30,9 +30,6 @@ object SearchHistory {
             historyTracksList = getInfo?.let { historyTracksFromJson(it) }!!
             Log.i("Track", "Восстанавливаем список ${historyTracksList}")
         }
-        //e historyTracksFromJson(getInfo)?.toMutableList()!!
-
-        //}
     }
 
     fun writeSharedPref(sharedPreferences: SharedPreferences) {
@@ -46,5 +43,9 @@ object SearchHistory {
         } else {
             historyTracksList.add(newTrack)
         }
+    }
+
+    fun clearList() {
+        historyTracksList.clear()
     }
 }
