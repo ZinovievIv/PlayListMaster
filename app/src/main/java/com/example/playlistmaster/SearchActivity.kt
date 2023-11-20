@@ -101,6 +101,7 @@ class SearchActivity : AppCompatActivity() {
             binding.searchBar.setText("")
             binding.searchBar.hideKeyboard()
             adapter.clearListTracks(trackList)
+            recycle.visibility=View.INVISIBLE
             adapterHistory.updateAdapter()
             visibilityViews("StartSearchActivity")
         }
@@ -111,6 +112,7 @@ class SearchActivity : AppCompatActivity() {
         }
 
         binding.arrowBack.setOnClickListener {
+            SearchHistory.writeSharedPref(sharedPreferencesHistory)
             finish()
         }
 
