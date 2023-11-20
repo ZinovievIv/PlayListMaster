@@ -16,7 +16,7 @@ class App: Application() {
     override fun onCreate() {
         super.onCreate()
         val sharePref = getSharedPreferences(SETTINGS, MODE_PRIVATE)
-        val sharedPreferencesHistory = getSharedPreferences(HISTORY_SEARCH, MODE_PRIVATE)
+        val sharedPreferencesHistory = getSharedPreferences(HISTORYTRACKS, MODE_PRIVATE)
         SearchHistory.readSharedPref(sharedPreferencesHistory)
         darkTheme = sharePref.getBoolean(THEME_SWITCH_POSITION, false)
         switchTheme(darkTheme)

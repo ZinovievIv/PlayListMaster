@@ -37,10 +37,10 @@ class SearchActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val sharedPreferencesHistory = getSharedPreferences(HISTORYTRACKS, MODE_PRIVATE)
+        SearchHistory.readSharedPref(sharedPreferencesHistory)
         binding = ActivitySearchBinding.inflate(layoutInflater)
         val view = binding.root
-        val sharedPreferencesHistory = getSharedPreferences(HISTORY_SEARCH, MODE_PRIVATE)
-        SearchHistory.readSharedPref(sharedPreferencesHistory)
         setContentView(view)
 
         val recycle = binding.recycleView
@@ -134,6 +134,7 @@ class SearchActivity : AppCompatActivity() {
         super.onStop()
         val sharedPreferences = getSharedPreferences(HISTORYTRACKS, MODE_PRIVATE)
         SearchHistory.writeSharedPref(sharedPreferences)
+        Log.i("Track", "Записаны треки в память - ${SearchHistory.historyTracksList}")
     }
 
 
