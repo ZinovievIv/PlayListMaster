@@ -22,5 +22,6 @@
     <string name="update">Обновить</string>
     <string name="trouble_network">Проблемы со связью\n\nЗагрузка не удалась. Проверьте\nподключение к интернету</string>
     <string name="you_search">Вы искали</string>
+    <string name="clear_history">Очистить историю</string>
 
 </resources>

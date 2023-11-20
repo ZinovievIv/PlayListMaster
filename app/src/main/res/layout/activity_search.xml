@@ -142,12 +142,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="gone"/>
+    </FrameLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="visible">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycleViewHistory"
-            android:layout_marginTop="84dp"
+            android:layout_marginTop="64dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:visibility="visible"/>
 
         <TextView
@@ -156,8 +162,15 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:visibility="visible"
-            android:layout_marginTop="42dp"
+            android:layout_marginTop="24dp"
             android:layout_gravity="center_horizontal"
             android:text="@string/you_search"/>
-    </FrameLayout>
+
+        <Button
+            style="@style/ButtonUpdate"
+            android:layout_width="148dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal||bottom"
+            android:text="@string/clear_history"/>
+    </LinearLayout>
 </LinearLayout>

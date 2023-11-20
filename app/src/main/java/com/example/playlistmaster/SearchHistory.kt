@@ -26,13 +26,13 @@ object SearchHistory {
         if (getInfo.isNullOrEmpty()) {
             historyTracksList = mutableListOf<Track>()
             Log.i("Track", "Восстанавливаем пустой список ${historyTracksList}")
-        }  else {
+        } else {
             historyTracksList = getInfo?.let { historyTracksFromJson(it) }!!
             Log.i("Track", "Восстанавливаем список ${historyTracksList}")
         }
-         //e historyTracksFromJson(getInfo)?.toMutableList()!!
+        //e historyTracksFromJson(getInfo)?.toMutableList()!!
 
-                //}
+        //}
     }
 
     fun writeSharedPref(sharedPreferences: SharedPreferences) {
@@ -40,19 +40,12 @@ object SearchHistory {
     }
 
     fun addTrack(newTrack: Track) {
-        //if (historyTracksList.isNotEmpty()) {
-        //    for (track in historyTracksList) {
-        //        Log.i("Track", "${track.trackId}")
-                    //                    Log.i("Track", "${newTrack.trackId}")
-                    //                    if (newTrack.trackId == track.trackId) {
-        //            Log.i("Track", "Не добавлено")
-                            //                            } else {
-        //            historyTracksList.add(newTrack)
-                            //                                Log.i("Track", "Добавлен")
-                            //                            }
-                    //                }
-                //        } else {
+        if (historyTracksList.size == 10) {
+            historyTracksList.remove(historyTracksList.first())
             historyTracksList.add(newTrack)
-                //}
+        } else {
+            historyTracksList.add(newTrack)
+            //}
+        }
     }
 }

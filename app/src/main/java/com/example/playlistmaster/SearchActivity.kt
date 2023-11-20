@@ -2,6 +2,7 @@ package com.example.playlistmaster
 
 import android.content.Intent
 import android.content.SharedPreferences
+
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -12,6 +13,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import com.example.playlistmaster.databinding.ActivitySearchBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -48,7 +50,7 @@ class SearchActivity : AppCompatActivity() {
         recycle.adapter = adapter
 
         val recyclerHistory = binding.recycleViewHistory
-        recyclerHistory.layoutManager = LinearLayoutManager(this)
+        recyclerHistory.layoutManager = LinearLayoutManager(this, VERTICAL, true)
         recyclerHistory.adapter = adapterHistory
 
         fun request() {
