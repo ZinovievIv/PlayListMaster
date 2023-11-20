@@ -113,6 +113,7 @@ class SearchActivity : AppCompatActivity() {
                     binding.clearButton.visibility = View.GONE
                     binding.recycleViewHistory.visibility = if (binding.searchBar.hasFocus()) View.INVISIBLE else View.VISIBLE
                     binding.recycleView.visibility = if (binding.searchBar.hasFocus()) View.VISIBLE else View.INVISIBLE
+                    binding.searchHistoryNotif.visibility = if (binding.searchHistoryNotif.hasFocus()) View.INVISIBLE else View.VISIBLE
                 } else {
                     binding.clearButton.visibility = View.VISIBLE
                 }
@@ -126,6 +127,7 @@ class SearchActivity : AppCompatActivity() {
             Log.i("List", "${SearchHistory.historyTracksList}")
             binding.recycleViewHistory.visibility = if (hasFocus) View.INVISIBLE else View.VISIBLE
             binding.recycleView.visibility = if (hasFocus) View.VISIBLE else View.INVISIBLE
+            binding.searchHistoryNotif.visibility = if (hasFocus) View.INVISIBLE else View.VISIBLE
         }
         binding.searchBar.addTextChangedListener(textWatcher)
     }
