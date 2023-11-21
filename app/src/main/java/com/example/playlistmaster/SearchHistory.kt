@@ -37,7 +37,10 @@ object SearchHistory {
     }
 
     fun addTrack(newTrack: Track) {
-        if (historyTracksList.size == 10) {
+        if (historyTracksList.contains(newTrack)){
+            historyTracksList.remove(newTrack)
+            historyTracksList.add(9, newTrack)
+        } else if (historyTracksList.size == 10) {
             historyTracksList.remove(historyTracksList.first())
             historyTracksList.add(newTrack)
         } else {
