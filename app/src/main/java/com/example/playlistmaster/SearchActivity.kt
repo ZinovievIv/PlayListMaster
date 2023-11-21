@@ -221,6 +221,7 @@ class SearchActivity : AppCompatActivity() {
                         textPlaceHolderNoNetwork.visibility = View.INVISIBLE
                         imagePlaceHolderNoResults.visibility = View.INVISIBLE
                         textPlaceHolderNoResults.visibility = View.INVISIBLE
+                        buttonUpdate.visibility = View.INVISIBLE
                     } else {
                         adapterHistory.updateAdapter()
                         searchHistoryNotif.visibility = View.VISIBLE
@@ -230,6 +231,7 @@ class SearchActivity : AppCompatActivity() {
                         textPlaceHolderNoNetwork.visibility = View.INVISIBLE
                         imagePlaceHolderNoResults.visibility = View.INVISIBLE
                         textPlaceHolderNoResults.visibility = View.INVISIBLE
+                        buttonUpdate.visibility = View.INVISIBLE
                     }
                 }
             }
