@@ -1,10 +1,54 @@
 package com.example.playlistmaster
 import android.content.SharedPreferences
+import android.os.Bundle
+import android.os.PersistableBundle
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
 
-const val HISTORYTRACKSKEY = "history_tracks_list"
+const val HISTORYTRACKS = "history_tracks_list"
+const val HISTORYTRACKSKEY = "history_tracks_key"
 
-class SearchHistory {
+object SearchHistory {
 
+    var historyTracksList = mutableListOf<Track>()
 
+    private fun historyTracksToJson(): String {
+        return Gson().toJson(historyTracksList)
+    }
+
+    private fun historyTracksFromJson(json: String): MutableList<Track> {
+        return Gson().fromJson(json, Array<Track>::class.java).toMutableList()
+    }
+
+    fun readSharedPref(sharedPreferences: SharedPreferences) {
+        val getInfo = sharedPreferences.getString(HISTORYTRACKSKEY, "")
+        if (getInfo.isNullOrEmpty()) {
+            historyTracksList = mutableListOf<Track>()
+            Log.i("Track", "Восстанавливаем пустой список ${historyTracksList}")
+        } else {
+            historyTracksList = getInfo?.let { historyTracksFromJson(it) }!!
+            Log.i("Track", "Восстанавливаем список ${historyTracksList}")
+        }
+    }
+
+    fun writeSharedPref(sharedPreferences: SharedPreferences) {
+        sharedPreferences.edit().putString(HISTORYTRACKSKEY, historyTracksToJson()).apply()
+    }
+
+    fun addTrack(newTrack: Track) {
+        if (historyTracksList.contains(newTrack)){
+            historyTracksList.remove(newTrack)
+            historyTracksList.add(9, newTrack)
+        } else if (historyTracksList.size == 10) {
+            historyTracksList.remove(historyTracksList.first())
+            historyTracksList.add(newTrack)
+        } else {
+            historyTracksList.add(newTrack)
+        }
+    }
+
+    fun clearList() {
+        historyTracksList.clear()
+    }
 }

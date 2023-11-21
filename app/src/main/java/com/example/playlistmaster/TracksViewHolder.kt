@@ -21,7 +21,7 @@ class TracksViewHolder(itemView: View, private val context: Context) : RecyclerV
     private val trackTimeView: TextView
     private val imageAlbumURL: ImageView
 
-    private val roundCornenRadius = 2.0f
+    private val roundCornerRadius = 2.0f
 
     init {
         trackNameView = itemView.findViewById(R.id.trackName)
@@ -36,7 +36,7 @@ class TracksViewHolder(itemView: View, private val context: Context) : RecyclerV
         trackTimeView.text = track.getFormattedTrackTime()
         Glide.with(itemView)
             .load(track.imageAlbumURL)
-            .transform(RoundedCorners(dpToPx(roundCornenRadius, context)))
+            .transform(RoundedCorners(dpToPx(roundCornerRadius, context)))
             .placeholder(R.drawable.placeholder_track)
             .into(imageAlbumURL)
     }

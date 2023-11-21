@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="?attr/colorPrimaryVariant"
     android:orientation="vertical"
     tools:context=".SearchActivity">
@@ -59,14 +59,14 @@
             <EditText
                 android:id="@+id/searchBar"
                 style="@style/TextClassicStyle"
-                android:imeOptions="actionDone"
-                android:singleLine="true"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:hint="@string/search"
+                android:imeOptions="actionDone"
                 android:paddingStart="@dimen/offset_8"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:textColorHint="?attr/itemFillColor"
                 app:animateMenuItems="true"
@@ -88,67 +88,93 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/imagePlaceHolderNoNetwork"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:visibility="invisible"
-                android:layout_marginTop="102dp"
-                android:src="@drawable/placeholder_no_network"/>
+        <ImageView
+            android:id="@+id/imagePlaceHolderNoNetwork"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="102dp"
+            android:src="@drawable/placeholder_no_network"
+            android:visibility="invisible" />
 
-            <TextView
-                android:id="@+id/textPlaceHolderNoNetwork"
-                style="@style/TextPlaceHolder"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/trouble_network"
-                android:visibility="invisible"
-                android:gravity="center_horizontal"
-                android:layout_marginTop="268dp"/>
+        <TextView
+            android:id="@+id/textPlaceHolderNoNetwork"
+            style="@style/TextPlaceHolder"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="268dp"
+            android:gravity="center_horizontal"
+            android:text="@string/trouble_network"
+            android:visibility="invisible" />
 
-            <Button
-                android:id="@+id/buttonUpdate"
-                style="@style/ButtonUpdate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="376dp"
-                android:visibility="invisible"
-                android:text="@string/update"
-                android:layout_gravity="center_horizontal"/>
+        <Button
+            android:id="@+id/buttonUpdate"
+            style="@style/ButtonInSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="376dp"
+            android:text="@string/update"
+            android:visibility="gone" />
 
-            <ImageView
-                android:id="@+id/imagePlaceHolderNoResults"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                android:layout_marginTop="102dp"
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/placeholder_no_results"/>
+        <ImageView
+            android:id="@+id/imagePlaceHolderNoResults"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="102dp"
+            android:src="@drawable/placeholder_no_results"
+            android:visibility="invisible" />
 
-            <TextView
-                android:id="@+id/textPlaceHolderNoResults"
-                style="@style/TextPlaceHolder"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:visibility="invisible"
-                android:layout_marginTop="238dp"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/no_result" />
+        <TextView
+            android:id="@+id/textPlaceHolderNoResults"
+            style="@style/TextPlaceHolder"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="238dp"
+            android:text="@string/no_result"
+            android:visibility="invisible" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycleView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="invisible"/>
+            android:visibility="gone" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycleViewHistory"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="invisible"/>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/searchHistoryNotif"
+                    style="@style/Notifity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/you_search"
+                    android:visibility="visible" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycleViewHistory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:visibility="visible" />
+
+                <Button
+                    android:id="@+id/clearhistory"
+                    style="@style/ButtonInSearch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/offset_12"
+                    android:text="@string/clear_history"
+                    android:visibility="visible" />
+            </LinearLayout>
     </FrameLayout>
-
 </LinearLayout>

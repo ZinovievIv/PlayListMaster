@@ -1,11 +1,13 @@
 package com.example.playlistmaster
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class TracksHistoryAdapter(private val historyTracksList: ArrayList<Track>, private val context: Context ) : RecyclerView.Adapter<TracksViewHolder>() {
+class TracksHistoryAdapter(private val historyTracksList: MutableList<Track>,
+                           private val context: Context) : RecyclerView.Adapter<TracksViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TracksViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.track_for_recycle_view,parent,false)
@@ -17,8 +19,19 @@ class TracksHistoryAdapter(private val historyTracksList: ArrayList<Track>, priv
     override fun onBindViewHolder(holder: TracksViewHolder, position: Int) {
         holder.bind(historyTracksList[position])
         holder.itemView.setOnClickListener {
-
         }
-
     }
+
+    fun updateAdapter() {
+        historyTracksList.clear()
+        historyTracksList.addAll(SearchHistory.historyTracksList)
+        notifyDataSetChanged()
+    }
+
+    fun clearListTracks() {
+        historyTracksList.clear()
+        SearchHistory.historyTracksList.clear()
+        notifyDataSetChanged()
+    }
+
 }
