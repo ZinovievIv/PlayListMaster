@@ -105,9 +105,7 @@ class SearchActivity : AppCompatActivity() {
             binding.searchBar.setText("")
             binding.searchBar.hideKeyboard()
             adapter.clearListTracks(trackList)
-            recycle.visibility=View.INVISIBLE
-            adapterHistory.updateAdapter()
-            visibilityViews("StartSearchActivity")
+            visibilityViews("ForClearSearchBarButton")
         }
 
         binding.clearhistory.setOnClickListener{
@@ -126,11 +124,7 @@ class SearchActivity : AppCompatActivity() {
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (p0.isNullOrEmpty()) {
-                    binding.clearButton.visibility = View.GONE
-                    binding.recycleViewHistory.visibility = if (binding.searchBar.hasFocus()) View.INVISIBLE else View.VISIBLE
-                    binding.recycleView.visibility = if (binding.searchBar.hasFocus()) View.VISIBLE else View.INVISIBLE
-                    binding.searchHistoryNotif.visibility = if (binding.searchHistoryNotif.hasFocus()) View.INVISIBLE else View.VISIBLE
-                    binding.clearhistory.visibility = if (binding.clearhistory.hasFocus()) View.INVISIBLE else View.VISIBLE
+                    visibilityViews("VisibleForOnTextChanged")
                 } else {
                     binding.clearButton.visibility = View.VISIBLE
                 }
@@ -209,7 +203,35 @@ class SearchActivity : AppCompatActivity() {
                         recycleViewHistory.visibility = View.VISIBLE
                     }
                 }
-
+                "VisibleForOnTextChanged" -> {
+                    clearButton.visibility = View.GONE
+                    recycleViewHistory.visibility = if (binding.searchBar.hasFocus()) View.INVISIBLE else View.VISIBLE
+                    recycleView.visibility = if (binding.searchBar.hasFocus()) View.VISIBLE else View.INVISIBLE
+                    searchHistoryNotif.visibility = if (binding.searchHistoryNotif.hasFocus()) View.INVISIBLE else View.VISIBLE
+                    clearhistory.visibility = if (binding.clearhistory.hasFocus()) View.INVISIBLE else View.VISIBLE
+                }
+                "ForClearSearchBarButton" -> {
+                    recycleView.visibility = View.INVISIBLE
+                    if(SearchHistory.historyTracksList.size == 0) {
+                        adapterHistory.updateAdapter()
+                        searchHistoryNotif.visibility = View.INVISIBLE
+                        clearhistory.visibility = View.INVISIBLE
+                        recycleViewHistory.visibility = View.INVISIBLE
+                        imagePlaceHolderNoNetwork.visibility = View.INVISIBLE
+                        textPlaceHolderNoNetwork.visibility = View.INVISIBLE
+                        imagePlaceHolderNoResults.visibility = View.INVISIBLE
+                        textPlaceHolderNoResults.visibility = View.INVISIBLE
+                    } else {
+                        adapterHistory.updateAdapter()
+                        searchHistoryNotif.visibility = View.VISIBLE
+                        clearhistory.visibility = View.VISIBLE
+                        recycleViewHistory.visibility = View.VISIBLE
+                        imagePlaceHolderNoNetwork.visibility = View.INVISIBLE
+                        textPlaceHolderNoNetwork.visibility = View.INVISIBLE
+                        imagePlaceHolderNoResults.visibility = View.INVISIBLE
+                        textPlaceHolderNoResults.visibility = View.INVISIBLE
+                    }
+                }
             }
         }
     }
