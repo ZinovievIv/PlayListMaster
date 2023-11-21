@@ -93,6 +93,10 @@ class SearchActivity : AppCompatActivity() {
         binding.searchBar.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 request()
+                recyclerHistory.visibility = View.INVISIBLE
+                binding.searchHistoryNotif.visibility = View.INVISIBLE
+                binding.clearhistory.visibility = View.INVISIBLE
+                binding.recycleView.visibility = View.VISIBLE
             }
             false
         }
