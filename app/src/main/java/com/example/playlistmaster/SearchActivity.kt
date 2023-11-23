@@ -39,18 +39,19 @@ class SearchActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val sharedPreferencesHistory = getSharedPreferences(HISTORYTRACKS, MODE_PRIVATE)
+        val sharedPreferencesHistory = getSharedPreferences(HISTORY_TRACKS, MODE_PRIVATE)
         SearchHistory.readSharedPref(sharedPreferencesHistory)
         binding = ActivitySearchBinding.inflate(layoutInflater)
-        visibilityViews("StartSearchActivity")
+        visibilityViews(VisibilityView.START_SEARCH_ACTIVITY)
         val view = binding.root
         setContentView(view)
 
         val recycle = binding.recycleView
+        val recyclerHistory = binding.recycleViewHistory
+
         recycle.layoutManager = LinearLayoutManager(this)
         recycle.adapter = adapter
 
-        val recyclerHistory = binding.recycleViewHistory
         recyclerHistory.layoutManager = LinearLayoutManager(this, VERTICAL, true)
         recyclerHistory.adapter = adapterHistory
 
@@ -63,30 +64,29 @@ class SearchActivity : AppCompatActivity() {
                             call: Call<TrackResponse>,
                             response: Response<TrackResponse>
                         ) {
-                            if (response.code() == 200) {
-                                Log.i("Network", "${response.body()}")
+                            if (response.isSuccessful) {
                                 adapter.clearListTracks(trackList)
-                                if (response.body()?.results?.isNotEmpty() == true) {
+                                val responseBody = response.body()?.results!!
                                     recycle.adapter?.let {
                                         if (it is TracksAdapter) {
-                                            it.updateTracks(response.body()?.results!!)
+                                            it.updateTracks(responseBody)
                                         }
                                     }
-                                }
                                 if (trackList.isEmpty()) {
-                                    visibilityViews("NoResult")
+                                    visibilityViews(VisibilityView.NO_RESULT)
                                 }
                             }
                         }
 
                         override fun onFailure(call: Call<TrackResponse>, t: Throwable) {
-                            visibilityViews("NoNetwork")
+                            visibilityViews(VisibilityView.NO_NETWORK)
                         }
                     })
             }
         }
 
         binding.buttonUpdate.setOnClickListener {
+            visibilityViews(VisibilityView.UPDATE_SEARCH)
             request()
         }
 
@@ -105,12 +105,12 @@ class SearchActivity : AppCompatActivity() {
             binding.searchBar.setText("")
             binding.searchBar.hideKeyboard()
             adapter.clearListTracks(trackList)
-            visibilityViews("ForClearSearchBarButton")
+            visibilityViews(VisibilityView.FOR_CLEAR_SEARCHBAR_BUTTON)
         }
 
         binding.clearhistory.setOnClickListener{
             adapterHistory.clearListTracks()
-            visibilityViews("StartSearchActivity")
+            visibilityViews(VisibilityView.START_SEARCH_ACTIVITY)
         }
 
         binding.arrowBack.setOnClickListener {
@@ -119,23 +119,23 @@ class SearchActivity : AppCompatActivity() {
         }
 
         val textWatcher = object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                if (p0.isNullOrEmpty()) {
-                    visibilityViews("VisibleForOnTextChanged")
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (s.isNullOrEmpty()) {
+                    visibilityViews(VisibilityView.VISIBLE_FOR_ON_TEXT_CHANGED)
                 } else {
                     binding.clearButton.visibility = View.VISIBLE
                 }
-                searchText = p0.toString()
+                searchText = s.toString()
             }
 
-            override fun afterTextChanged(p0: Editable?) {
+            override fun afterTextChanged(s: Editable?) {
             }
         }
+
         binding.searchBar.setOnFocusChangeListener{view, hasFocus ->
-            Log.i("List", "${SearchHistory.historyTracksList}")
             binding.recycleViewHistory.visibility = if (hasFocus) View.INVISIBLE else View.VISIBLE
             binding.recycleView.visibility = if (hasFocus) View.VISIBLE else View.INVISIBLE
             binding.searchHistoryNotif.visibility = if (hasFocus) View.INVISIBLE else View.VISIBLE
@@ -146,9 +146,8 @@ class SearchActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
-        val sharedPreferences = getSharedPreferences(HISTORYTRACKS, MODE_PRIVATE)
+        val sharedPreferences = getSharedPreferences(HISTORY_TRACKS, MODE_PRIVATE)
         SearchHistory.writeSharedPref(sharedPreferences)
-        Log.i("Track", "Записаны треки в память - ${SearchHistory.historyTracksList}")
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -162,10 +161,10 @@ class SearchActivity : AppCompatActivity() {
         searchBar.setText(savedInstanceState.getString(PRODUCT_AMOUNT))
     }
 
-    private fun visibilityViews(trouble: String) {
+    private fun visibilityViews(action: VisibilityView) {
         with(binding) {
-            when (trouble) {
-                "NoNetwork" -> {
+            when (action) {
+                VisibilityView.NO_NETWORK -> {
                     buttonUpdate.visibility = View.VISIBLE
                     textPlaceHolderNoNetwork.visibility = View.VISIBLE
                     imagePlaceHolderNoNetwork.visibility = View.VISIBLE
@@ -173,7 +172,7 @@ class SearchActivity : AppCompatActivity() {
                     textPlaceHolderNoResults.visibility = View.INVISIBLE
                     recycleView.visibility = View.INVISIBLE
                 }
-                "NoResult" -> {
+                VisibilityView.NO_RESULT -> {
                     imagePlaceHolderNoResults.visibility = View.VISIBLE
                     textPlaceHolderNoResults.visibility = View.VISIBLE
                     buttonUpdate.visibility = View.INVISIBLE
@@ -181,7 +180,7 @@ class SearchActivity : AppCompatActivity() {
                     imagePlaceHolderNoNetwork.visibility = View.INVISIBLE
                     recycleView.visibility = View.INVISIBLE
                 }
-                "UpdateSearch" -> {
+                VisibilityView.UPDATE_SEARCH -> {
                     imagePlaceHolderNoResults.visibility = View.INVISIBLE
                     textPlaceHolderNoResults.visibility = View.INVISIBLE
                     buttonUpdate.visibility = View.INVISIBLE
@@ -189,10 +188,10 @@ class SearchActivity : AppCompatActivity() {
                     imagePlaceHolderNoNetwork.visibility = View.INVISIBLE
                     recycleView.visibility = View.VISIBLE
                 }
-                "HistoryView" -> {
+                VisibilityView.HISTORY_VIEW -> {
                     recycleViewHistory.visibility = View.VISIBLE
                 }
-                "StartSearchActivity" -> {
+                VisibilityView.START_SEARCH_ACTIVITY -> {
                     if(SearchHistory.historyTracksList.size == 0) {
                         searchHistoryNotif.visibility = View.INVISIBLE
                         clearhistory.visibility = View.INVISIBLE
@@ -203,14 +202,18 @@ class SearchActivity : AppCompatActivity() {
                         recycleViewHistory.visibility = View.VISIBLE
                     }
                 }
-                "VisibleForOnTextChanged" -> {
+                VisibilityView.VISIBLE_FOR_ON_TEXT_CHANGED -> {
                     clearButton.visibility = View.GONE
-                    recycleViewHistory.visibility = if (binding.searchBar.hasFocus()) View.INVISIBLE else View.VISIBLE
-                    recycleView.visibility = if (binding.searchBar.hasFocus()) View.VISIBLE else View.INVISIBLE
-                    searchHistoryNotif.visibility = if (binding.searchHistoryNotif.hasFocus()) View.INVISIBLE else View.VISIBLE
-                    clearhistory.visibility = if (binding.clearhistory.hasFocus()) View.INVISIBLE else View.VISIBLE
+                    recycleViewHistory.visibility = if (binding.searchBar.hasFocus()) View.INVISIBLE
+                    else View.VISIBLE
+                    recycleView.visibility = if (binding.searchBar.hasFocus()) View.VISIBLE
+                    else View.INVISIBLE
+                    searchHistoryNotif.visibility = if (binding.searchHistoryNotif.hasFocus()) View.INVISIBLE
+                    else View.VISIBLE
+                    clearhistory.visibility = if (binding.clearhistory.hasFocus()) View.INVISIBLE
+                    else View.VISIBLE
                 }
-                "ForClearSearchBarButton" -> {
+                VisibilityView.FOR_CLEAR_SEARCHBAR_BUTTON -> {
                     recycleView.visibility = View.INVISIBLE
                     if(SearchHistory.historyTracksList.size == 0) {
                         adapterHistory.updateAdapter()
@@ -238,16 +241,24 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
-
     private fun View.hideKeyboard() {
         val inputManager =
             context.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         inputManager.hideSoftInputFromWindow(windowToken, 0)
     }
 
-
     companion object {
         private const val PRODUCT_AMOUNT = "PRODUCT_AMOUNT"
+    }
+
+    enum class VisibilityView(action: String) {
+        NO_NETWORK("noNetwork"),
+        NO_RESULT("noResult"),
+        UPDATE_SEARCH("updateSearch"),
+        HISTORY_VIEW("historyView"),
+        START_SEARCH_ACTIVITY("startSearchActivity"),
+        VISIBLE_FOR_ON_TEXT_CHANGED("visibleForOnTextChanged"),
+        FOR_CLEAR_SEARCHBAR_BUTTON("forClearSearchBarButton"),
     }
 }
 

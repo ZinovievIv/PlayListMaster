@@ -6,8 +6,9 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
 
-const val HISTORYTRACKS = "history_tracks_list"
-const val HISTORYTRACKSKEY = "history_tracks_key"
+const val HISTORY_TRACKS = "history_tracks_list"
+const val HISTORY_TRACKS_KEY = "history_tracks_key"
+private const val MAX_HISTORY_SIZE = 10
 
 object SearchHistory {
 
@@ -22,25 +23,23 @@ object SearchHistory {
     }
 
     fun readSharedPref(sharedPreferences: SharedPreferences) {
-        val getInfo = sharedPreferences.getString(HISTORYTRACKSKEY, "")
-        if (getInfo.isNullOrEmpty()) {
-            historyTracksList = mutableListOf<Track>()
-            Log.i("Track", "Восстанавливаем пустой список ${historyTracksList}")
+        val getInfo = sharedPreferences.getString(HISTORY_TRACKS_KEY, "")
+        historyTracksList = if (getInfo.isNullOrEmpty()) {
+            mutableListOf<Track>()
         } else {
-            historyTracksList = getInfo?.let { historyTracksFromJson(it) }!!
-            Log.i("Track", "Восстанавливаем список ${historyTracksList}")
+            getInfo?.let { historyTracksFromJson(it) }!!
         }
     }
 
     fun writeSharedPref(sharedPreferences: SharedPreferences) {
-        sharedPreferences.edit().putString(HISTORYTRACKSKEY, historyTracksToJson()).apply()
+        sharedPreferences.edit().putString(HISTORY_TRACKS_KEY, historyTracksToJson()).apply()
     }
 
     fun addTrack(newTrack: Track) {
         if (historyTracksList.contains(newTrack)){
             historyTracksList.remove(newTrack)
-            historyTracksList.add(9, newTrack)
-        } else if (historyTracksList.size == 10) {
+            historyTracksList.add(newTrack)
+        } else if (historyTracksList.size == MAX_HISTORY_SIZE) {
             historyTracksList.remove(historyTracksList.first())
             historyTracksList.add(newTrack)
         } else {
