@@ -19,9 +19,8 @@ class PlayerActivity : AppCompatActivity() {
         binding = ActivityPlayerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.apply {
 
-            binding.toolbarMediaLibrary .setOnClickListener {
+            binding.toolbarPlayer.setOnClickListener {
                 finish()
             }
 
@@ -36,15 +35,14 @@ class PlayerActivity : AppCompatActivity() {
 
             track?.apply {
                 binding.trackTimeMills.text = trackTimeMillis.toString()
-                binding.releaseDate.text = releaseDate
+                binding.releaseDate.text = getDataRealize()
                 binding.primaryGenreName.text = primaryGenreName
                 binding.country.text = country
                 binding.artistName.text = artistName
                 binding.collectionName.text = collectionName
-                //timeTrack.text = getTimeTrack()
+                binding.trackNamePlayer.text = trackName
+                binding.trackTimeMills.text = getFormattedTrackTime()
                 //visibleGroup.isVisible = collectionName != null
             }
         }
     }
-
-}

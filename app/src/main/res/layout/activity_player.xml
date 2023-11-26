@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Pla">
+    tools:context=".PlayerActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarMediaLibrary"
+        android:id="@+id/toolbarPlayer"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,7 +40,7 @@
         android:src="@drawable/placeholder_track"
         app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarMediaLibrary" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbarPlayer" />
 
     <TextView
         android:id="@+id/track_name_player"
@@ -94,12 +94,12 @@
         android:id="@+id/button_like"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/button_like"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintHorizontal_bias="1.0"
         android:layout_marginTop="@dimen/offset_24"
+        android:src="@drawable/button_like"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/play"
-        app:layout_constraintTop_toTopOf="@+id/play"/>
+        app:layout_constraintTop_toTopOf="@+id/play" />
 
     <TextView
         android:id="@+id/trackTimeNow"

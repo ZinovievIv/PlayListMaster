@@ -2,8 +2,11 @@ package com.example.playlistmaster
 
 import android.os.Parcel
 import android.os.Parcelable
+import android.util.Log
 import com.google.gson.annotations.SerializedName
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 data class Track(
@@ -38,6 +41,9 @@ data class Track(
 
     fun getFormattedTrackTime(): String {
         return SimpleDateFormat("mm:ss", Locale.getDefault()).format(trackTimeMillis)
+    }
+    fun getDataRealize() : String? {
+        return releaseDate?.substring(startIndex = 0, endIndex = 4) ?: releaseDate
     }
     fun getCoverArtwork() = imageAlbumURL?.replaceAfterLast('/', "512x512bb.jpg")
     override fun writeToParcel(parcel: Parcel, flags: Int) {
