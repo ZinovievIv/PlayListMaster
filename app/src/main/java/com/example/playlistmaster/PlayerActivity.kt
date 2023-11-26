@@ -8,7 +8,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.playlistmaster.databinding.ActivityPlayerBinding
 
-const val INFO_TRACK = "Track"
+const val TRACK = "track_info"
+
 class PlayerActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPlayerBinding
 
@@ -23,9 +24,8 @@ class PlayerActivity : AppCompatActivity() {
             binding.toolbarMediaLibrary .setOnClickListener {
                 finish()
             }
-            //val track = intent.getParcelableExtra<Track>(INFO_TRACK)
-            //не совместим с 26 мин вер. нужна 33
-            val track = intent.getParcelableExtra("track",Track::class.java)
+
+            val track = intent.getParcelableExtra<Track>(TRACK)
 
             Glide.with(this@PlayerActivity)
                 .load(track?.getCoverArtwork())

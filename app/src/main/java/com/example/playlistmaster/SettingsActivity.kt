@@ -28,7 +28,7 @@ class SettingsActivity : AppCompatActivity() {
         val imageButtonClickListener: View.OnClickListener = View.OnClickListener { v ->
             when (v?.id) {
                 R.id.arrow_back -> {
-                    finish()
+
                 }
 
                 R.id.button_share -> {

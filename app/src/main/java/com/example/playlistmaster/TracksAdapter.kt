@@ -2,10 +2,11 @@ package com.example.playlistmaster
 
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
-import android.util.Log
+import android.os.Parcel
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 
 class TracksAdapter(private val listTracks: ArrayList<Track>,
@@ -22,8 +23,9 @@ class TracksAdapter(private val listTracks: ArrayList<Track>,
         holder.bind(track)
         holder.itemView.setOnClickListener {
             SearchHistory.addTrack(track)
-            Log.i("Track", "В адаптере ${SearchHistory.historyTracksList}")
-
+            val intent = Intent(this.context, PlayerActivity::class.java)
+            intent.putExtra("track_info", track)
+            startActivity(context, intent, null)
         }
     }
 
@@ -37,6 +39,5 @@ class TracksAdapter(private val listTracks: ArrayList<Track>,
         listTracks.clear()
         notifyDataSetChanged()
     }
-
 
 }
