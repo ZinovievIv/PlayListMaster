@@ -1,12 +1,15 @@
 package com.example.playlistmaster
 
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
+import android.util.TypedValue
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.playlistmaster.databinding.ActivityPlayerBinding
+import com.google.android.material.internal.ViewUtils.dpToPx
 
 const val TRACK = "track_info"
 
@@ -19,6 +22,7 @@ class PlayerActivity : AppCompatActivity() {
         binding = ActivityPlayerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val radiusImage = dpToPx(8f, this@PlayerActivity)
 
             binding.toolbarPlayer.setOnClickListener {
                 finish()
@@ -30,7 +34,7 @@ class PlayerActivity : AppCompatActivity() {
                 .load(track?.getCoverArtwork())
                 .placeholder(R.drawable.placeholder_track)
                 .centerCrop()
-                .transform()
+                .transform(RoundedCorners(radiusImage))
                 .into(binding.imageView)
 
             track?.apply {
@@ -45,4 +49,14 @@ class PlayerActivity : AppCompatActivity() {
                 //visibleGroup.isVisible = collectionName != null
             }
         }
+    private fun dpToPx(
+        dp: Float,
+        context: Context,
+    ): Int {
+        return TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            dp,
+            context.resources.displayMetrics
+        ).toInt()
+    }
     }
