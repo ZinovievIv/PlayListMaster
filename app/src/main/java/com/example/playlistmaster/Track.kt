@@ -14,10 +14,17 @@ data class Track(
     val trackTimeMillis: Long,
     @SerializedName("artworkUrl100")
     val imageAlbumURL: String,
-    @SerializedName("trackId")
-    val trackId: Long
+    @SerializedName("collectionName")
+    val collectionName: String?,
+    @SerializedName("country")
+    val country: String?,
+    @SerializedName("releaseDate")
+    val releaseDate: String?,
+    @SerializedName("primaryGenreName")
+    val primaryGenreName: String?
 ) {
     fun getFormattedTrackTime(): String {
         return SimpleDateFormat("mm:ss", Locale.getDefault()).format(trackTimeMillis)
     }
+    fun getCoverArtwork() = imageAlbumURL?.replaceAfterLast('/', "512x512bb.jpg")
 }

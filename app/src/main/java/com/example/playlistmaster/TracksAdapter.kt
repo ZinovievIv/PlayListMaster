@@ -23,6 +23,7 @@ class TracksAdapter(private val listTracks: ArrayList<Track>,
         holder.itemView.setOnClickListener {
             SearchHistory.addTrack(track)
             Log.i("Track", "В адаптере ${SearchHistory.historyTracksList}")
+
         }
     }
 
