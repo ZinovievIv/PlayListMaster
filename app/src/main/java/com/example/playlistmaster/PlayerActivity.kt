@@ -35,7 +35,7 @@ class PlayerActivity : AppCompatActivity() {
                 .placeholder(R.drawable.placeholder_track)
                 .centerCrop()
                 .transform(RoundedCorners(radiusImage))
-                .into(binding.imageView)
+                .into(binding.imageAlbum)
 
             track?.apply {
                 binding.trackTimeMills.text = trackTimeMillis.toString()
