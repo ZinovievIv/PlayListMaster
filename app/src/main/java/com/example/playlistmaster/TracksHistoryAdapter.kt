@@ -1,9 +1,11 @@
 package com.example.playlistmaster
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 
 class TracksHistoryAdapter(private val historyTracksList: MutableList<Track>,
@@ -17,8 +19,12 @@ class TracksHistoryAdapter(private val historyTracksList: MutableList<Track>,
     override fun getItemCount(): Int = historyTracksList.size
 
     override fun onBindViewHolder(holder: TracksViewHolder, position: Int) {
-        holder.bind(historyTracksList[position])
+        val track = historyTracksList[position]
+        holder.bind(track)
         holder.itemView.setOnClickListener {
+            val intent = Intent(this.context, PlayerActivity::class.java)
+            intent.putExtra("track_info", track)
+            ContextCompat.startActivity(context, intent, null)
         }
     }
 

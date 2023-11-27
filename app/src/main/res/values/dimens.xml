@@ -16,6 +16,7 @@
     <dimen name="offset_6">6dp</dimen>
     <dimen name="offset_9">9dp</dimen>
     <dimen name="offset_28">28dp</dimen>
+    <dimen name="offset_17">17dp</dimen>
 
 
 
@@ -28,6 +29,7 @@
     <dimen name="size_16">16sp</dimen>
     <dimen name="size_11">11sp</dimen>
     <dimen name="size_14">14sp</dimen>
+    <dimen name="size_13">13sp</dimen>
 
 
 </resources>
