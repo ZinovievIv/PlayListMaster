@@ -13,6 +13,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/imageAlbum"
         app:navigationIcon="@drawable/arrow_back"
         app:titleTextColor="?attr/colorOnPrimary"/>
 
@@ -42,6 +43,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
         app:layout_constraintTop_toBottomOf="@id/toolbarPlayer"
+        app:layout_constraintBottom_toTopOf="@id/track_name_player"
         app:srcCompat="@drawable/placeholder_track" />
 
     <TextView
@@ -55,6 +57,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageAlbum"
+        app:layout_constraintBottom_toTopOf="@id/artistName"
         android:layout_marginTop="@dimen/offset_24"/>
 
     <TextView
@@ -69,7 +72,8 @@
         app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
-        app:layout_constraintTop_toBottomOf="@+id/track_name_player" />
+        app:layout_constraintTop_toBottomOf="@+id/track_name_player"
+        app:layout_constraintBottom_toTopOf="@id/play"/>
 
     <ImageView
         android:id="@+id/play"
@@ -79,7 +83,8 @@
         android:src="@drawable/button_play"
         app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
-        app:layout_constraintTop_toBottomOf="@+id/artistName" />
+        app:layout_constraintTop_toBottomOf="@+id/artistName"
+        app:layout_constraintBottom_toTopOf="@id/trackTimeNow"/>
 
     <ImageView
         android:id="@+id/imageView3"
@@ -90,7 +95,7 @@
         app:layout_constraintEnd_toStartOf="@+id/play"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
-        app:layout_constraintTop_toTopOf="@+id/play"/>
+        app:layout_constraintTop_toTopOf="@+id/play" />
 
     <ImageView
         android:id="@+id/button_like"
@@ -124,7 +129,8 @@
         android:layout_marginTop="39dp"
         android:text="@string/duration"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/trackTimeNow" />
+        app:layout_constraintTop_toBottomOf="@+id/trackTimeNow"
+        app:layout_constraintBottom_toTopOf="@id/textView3"/>
 
     <TextView
         style="@style/InfoAboutTrackInPlayer"
@@ -135,7 +141,8 @@
         android:layout_marginTop="@dimen/offset_17"
         android:text="@string/album"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintBottom_toTopOf="@id/textView4"/>
 
     <TextView
         style="@style/InfoAboutTrackInPlayer"
@@ -146,7 +153,8 @@
         android:layout_marginTop="17dp"
         android:text="@string/year"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintBottom_toTopOf="@id/textView5"/>
 
     <TextView
         style="@style/InfoAboutTrackInPlayer"
@@ -157,7 +165,8 @@
         android:layout_marginTop="17dp"
         android:text="@string/genre"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:layout_constraintBottom_toTopOf="@id/textView10"/>
 
     <TextView
         style="@style/InfoAboutTrackInPlayer"
@@ -166,9 +175,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/offset_16"
         android:layout_marginTop="17dp"
+        android:layout_marginBottom="@dimen/offset_28"
         android:text="@string/country"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <TextView
         style="@style/InfoAboutTrackInPlayer"
@@ -233,12 +244,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="17dp"
         android:layout_marginEnd="@dimen/offset_16"
+        android:layout_marginBottom="@dimen/offset_28"
         android:textColor="?attr/colorOnPrimary"
         android:text="@string/example_country"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/textView10"
-        app:layout_constraintTop_toBottomOf="@+id/primaryGenreName" />
+        app:layout_constraintTop_toBottomOf="@+id/primaryGenreName"
+        app:layout_constraintBaseline_toBottomOf="parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

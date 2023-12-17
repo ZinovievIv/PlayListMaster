@@ -11,12 +11,8 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.playlistmaster.databinding.ActivityPlayerBinding
 import com.google.android.material.internal.ViewUtils.dpToPx
 
-const val TRACK = "track_info"
-
 class PlayerActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPlayerBinding
-
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPlayerBinding.inflate(layoutInflater)
@@ -24,31 +20,31 @@ class PlayerActivity : AppCompatActivity() {
 
         val radiusImage = dpToPx(8f, this@PlayerActivity)
 
-            binding.toolbarPlayer.setOnClickListener {
-                finish()
-            }
-
-            val track = intent.getParcelableExtra<Track>(TRACK)
-
-            Glide.with(this@PlayerActivity)
-                .load(track?.getCoverArtwork())
-                .placeholder(R.drawable.placeholder_track)
-                .centerCrop()
-                .transform(RoundedCorners(radiusImage))
-                .into(binding.imageAlbum)
-
-            track?.apply {
-                binding.trackTimeMills.text = trackTimeMillis.toString()
-                binding.releaseDate.text = getDataRealize()
-                binding.primaryGenreName.text = primaryGenreName
-                binding.country.text = country
-                binding.artistName.text = artistName
-                binding.collectionName.text = collectionName
-                binding.trackNamePlayer.text = trackName
-                binding.trackTimeMills.text = getFormattedTrackTime()
-                //visibleGroup.isVisible = collectionName != null
-            }
+        binding.toolbarPlayer.setOnClickListener {
+            finish()
         }
+
+        val track = intent.getParcelableExtra<Track>(TRACK)
+
+        Glide.with(this@PlayerActivity)
+            .load(track?.getCoverArtwork())
+            .placeholder(R.drawable.placeholder_track)
+            .centerCrop()
+            .transform(RoundedCorners(radiusImage))
+            .into(binding.imageAlbum)
+
+        track?.apply {
+            binding.trackTimeMills.text = trackTimeMillis.toString()
+            binding.releaseDate.text = getDataRealize()
+            binding.primaryGenreName.text = primaryGenreName
+            binding.country.text = country
+            binding.artistName.text = artistName
+            binding.collectionName.text = collectionName
+            binding.trackNamePlayer.text = trackName
+            binding.trackTimeMills.text = getFormattedTrackTime()
+        }
+    }
+
     private fun dpToPx(
         dp: Float,
         context: Context,
@@ -59,4 +55,8 @@ class PlayerActivity : AppCompatActivity() {
             context.resources.displayMetrics
         ).toInt()
     }
+
+    companion object {
+        const val TRACK = "track_info"
     }
+}
